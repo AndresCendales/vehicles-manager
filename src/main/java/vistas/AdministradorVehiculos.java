@@ -75,7 +75,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        txtImprontaAutomovil = new javax.swing.JTextField();
+        txtPlacaAutomovil = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txtPasajerosAutomovil = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -349,7 +349,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Aviones", jPanel3);
 
-        jLabel11.setText("Impronta");
+        jLabel11.setText("Placa");
 
         jLabel12.setText("Pasajeros");
 
@@ -416,7 +416,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtCantidadCombustibleAutomovil)
                             .addComponent(txtPasajerosAutomovil)
-                            .addComponent(txtImprontaAutomovil)
+                            .addComponent(txtPlacaAutomovil)
                             .addComponent(cbEstadoAutomovil, 0, 180, Short.MAX_VALUE)
                             .addComponent(cbTipoCombustibleAutomovil, 0, 180, Short.MAX_VALUE))
                         .addGap(29, 29, 29))
@@ -432,7 +432,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtImprontaAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPlacaAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -678,7 +678,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
     private void btCrearAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearAutomovilActionPerformed
         try{
-            String improntaAutomovil = txtImprontaAutomovil.getText();
+            String improntaAutomovil = txtPlacaAutomovil.getText();
             int pasajerosAutomovil = Integer.parseInt(txtPasajerosAutomovil.getText());
             int cantidadCombustibleAutomovil = Integer.parseInt(txtCantidadCombustibleAutomovil.getText());
             String estadoAutomovil = cbEstadoAutomovil.getSelectedItem().toString();
@@ -698,7 +698,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btCrearAutomovilActionPerformed
 
     private void btConsultarAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarAutomovilActionPerformed
-        String improntaAutomovil = txtImprontaAutomovil.getText();
+        String improntaAutomovil = txtPlacaAutomovil.getText();
         boolean encontrado = false;
         for (clsVehiculo vehiculo: vehiculos){
             if (vehiculo.getImpronta_chasis().equals(improntaAutomovil)){
@@ -721,7 +721,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btConsultarAutomovilActionPerformed
 
     private void btEditarAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarAutomovilActionPerformed
-        String improntaAutomovil = txtImprontaAutomovil.getText();
+        String improntaAutomovil = txtPlacaAutomovil.getText();
         int cantidadCombustibleAutomovil = Integer.parseInt(txtCantidadCombustibleAutomovil.getText());
         int pasajerosAutomovil =Integer.parseInt(txtPasajerosAutomovil.getText());
         String estadoAutomovil = cbEstadoAutomovil.getSelectedItem().toString();
@@ -751,7 +751,22 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btEditarAutomovilActionPerformed
 
     private void btEliminarAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarAutomovilActionPerformed
-        // TODO add your handling code here:
+        String placaAutomovil = txtPlacaAutomovil.getText();
+        boolean encontrado = false;
+        for (clsVehiculo vehiculo: this.vehiculos){
+            if (vehiculo.getImpronta_chasis().equals(placaAutomovil)){
+                this.vehiculos.remove(vehiculo);
+                this.LimpiarFormulario();
+                this.Llenar_Lista();
+                JOptionPane.showMessageDialog(this, "El Automovil con placa: "
+                        + vehiculo.getImpronta_chasis() + " fue eliminado");
+                encontrado = true;
+                break;
+            }
+        }
+        if(encontrado==false){
+            JOptionPane.showMessageDialog(this, "Automovil no encontrado");
+        }
     }//GEN-LAST:event_btEliminarAutomovilActionPerformed
 
     private void Llenar_Lista(){
@@ -870,11 +885,11 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private javax.swing.JTextField txtCantidadCombustibleAutomovil;
     private javax.swing.JTextField txtCantidadCombustibleAvion;
     private javax.swing.JTextField txtCantidadCombustibleVehiculo;
-    private javax.swing.JTextField txtImprontaAutomovil;
     private javax.swing.JTextField txtImprontaAvion;
     private javax.swing.JTextField txtImprontaVehiculo;
     private javax.swing.JTextField txtPasajerosAutomovil;
     private javax.swing.JTextField txtPasajerosAvion;
     private javax.swing.JTextField txtPasajerosVehiculo;
+    private javax.swing.JTextField txtPlacaAutomovil;
     // End of variables declaration//GEN-END:variables
 }
