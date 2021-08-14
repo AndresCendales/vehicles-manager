@@ -491,20 +491,20 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
     private void btCrearVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearVehiculoActionPerformed
         try{
-        String improntaVehiculo = txtImprontaVehiculo.getText();
-        int pasajeros = Integer.parseInt(txtPasajerosVehiculo.getText());
-        int cantidadCombustible = Integer.parseInt(txtCantidadCombustibleVehiculo.getText());
-        String estadoVehiculo = cbEstadoVehiculo.getSelectedItem().toString();
-        
-        clsVehiculo vehiculo = new clsVehiculo(pasajeros,cantidadCombustible,improntaVehiculo,estadoVehiculo);
-            
-        ctrlVehiculo.CrearVehiculo(vehiculo);
+            String improntaVehiculo = txtImprontaVehiculo.getText();
+            int pasajeros = Integer.parseInt(txtPasajerosVehiculo.getText());
+            int cantidadCombustible = Integer.parseInt(txtCantidadCombustibleVehiculo.getText());
+            String estadoVehiculo = cbEstadoVehiculo.getSelectedItem().toString();
 
-        vehiculos.add(vehiculo);        
-        Llenar_Lista();     
-        LimpiarFormulario();
-        
-        JOptionPane.showMessageDialog(this, "Se instancio el vehiculo con la impronta: " + vehiculo.getImpronta_chasis()); 
+            clsVehiculo vehiculo = new clsVehiculo(pasajeros,cantidadCombustible,improntaVehiculo,estadoVehiculo);
+
+            ctrlVehiculo.CrearVehiculo(vehiculo);
+
+            vehiculos.add(vehiculo);        
+            this.Llenar_Lista();     
+            this.LimpiarFormulario();
+
+            JOptionPane.showMessageDialog(this, "Se instancio el vehiculo con la impronta: " + vehiculo.getImpronta_chasis()); 
         } catch(Exception e){
             JOptionPane.showMessageDialog(this, "Corrija los datos ingresados.");
         }
@@ -534,22 +534,22 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private void btEditarVehiculo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarVehiculo1ActionPerformed
         String improntaVehiculo = txtImprontaVehiculo.getText();
         boolean encontrado=false;
-        for (clsVehiculo vehiculo: vehiculos){
-            if (vehiculo.getImpronta_chasis().equals(improntaVehiculo)){
+            for (clsVehiculo vehiculo: vehiculos){
+                if (vehiculo.getImpronta_chasis().equals(improntaVehiculo)){
                 vehiculo.setCombustible(Integer.parseInt(txtCantidadCombustibleVehiculo.getText()));
                 vehiculo.setPasajeros(Integer.parseInt(txtPasajerosVehiculo.getText()));
                 vehiculo.setEstado_vehiculo(cbEstadoVehiculo.getSelectedItem().toString());
-                this.LimpiarFormulario();
-                this.Llenar_Lista();
-                JOptionPane.showMessageDialog(this, "El vehiculo con chasis: " 
-                        + vehiculo.getImpronta_chasis() + " fue actualizado");
-                encontrado = true;
-                break;
+                    this.LimpiarFormulario();
+                    this.Llenar_Lista();
+                    JOptionPane.showMessageDialog(this, "El vehiculo con chasis: " 
+                            + vehiculo.getImpronta_chasis() + " fue actualizado");
+                    encontrado = true;
+                    break;
+                }
             }
-        }
         
-        if (encontrado==false){
-            JOptionPane.showMessageDialog(this, "Vehículo no encontrado");
+            if (encontrado==false){
+                JOptionPane.showMessageDialog(this, "Vehículo no encontrado");
         }        
     }//GEN-LAST:event_btEditarVehiculo1ActionPerformed
 
@@ -600,12 +600,14 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         boolean encontrado=false;
         for (clsVehiculo vehiculo: vehiculos){
             if (vehiculo.getImpronta_chasis().equals(improntaAvion)){
-               
-                JOptionPane.showMessageDialog(this,"El avion con chasis: " 
-                        + vehiculo.getImpronta_chasis() + "\n"
-                +"Cantidad combustible: " + vehiculo.getCombustible()+"\n"+
-                        "Pasajeros: " + vehiculo.getPasajeros()+"\n"+
-                        "Estado Avion: " +vehiculo.getEstado_vehiculo());
+               clsAvion avion = (clsAvion)vehiculo;
+                JOptionPane.showMessageDialog(this,
+                        "El avion con chasis: "+ avion.getImpronta_chasis()+"\n" +
+                                "Cantidad combustible: " + avion.getCombustible()+"\n"+
+                                "Pasajeros: " + avion.getPasajeros()+"\n"+
+                                "Estado Avion: " +avion.getEstado_vehiculo()+"\n"+
+                                "Tipo Combustible: " + avion.getCombustible()
+                );
                  this.LimpiarFormulario();
                  this.Llenar_Lista();
                 encontrado = true;
@@ -614,7 +616,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         }
         
         if (encontrado==false){
-            JOptionPane.showMessageDialog(this, "Vehículo no encontrado");
+            JOptionPane.showMessageDialog(this, "avion no encontrado");
         }
         
         
@@ -643,15 +645,20 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
     private void btEditarAvionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarAvionActionPerformed
         String improntaAvion = txtImprontaAvion.getText();
+        int cantidadCombustibleAvion = Integer.parseInt(txtCantidadCombustibleAvion.getText());
+        int pasajerosAvion =Integer.parseInt(txtPasajerosAvion.getText());
+        String estadoAvion = cbEstadoAvion.getSelectedItem().toString();
+        String tipoCombustibleAvion = cbTipoCombustibleAvion.getSelectedItem().toString();
         boolean encontrado=false;
+
         for (clsVehiculo vehiculo: vehiculos){
             if (vehiculo.getImpronta_chasis().equals(improntaAvion)){
                 clsAvion avion = (clsAvion) vehiculo;
                 
-                avion.setCombustible(Integer.parseInt(txtCantidadCombustibleAvion.getText()));
-                avion.setPasajeros(Integer.parseInt(txtPasajerosAvion.getText()));
-                avion.setEstado_vehiculo(cbEstadoAvion.getSelectedItem().toString());
-                avion.setTipo_combustible(cbTipoCombustibleAvion.getSelectedItem().toString());
+                avion.setCombustible(cantidadCombustibleAvion);
+                avion.setPasajeros(pasajerosAvion);
+                avion.setEstado_vehiculo(estadoAvion);
+                avion.setTipo_combustible(tipoCombustibleAvion);
                
                 this.vehiculos.remove(vehiculo);
                 this.vehiculos.add(avion);
@@ -670,15 +677,77 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btEditarAvionActionPerformed
 
     private void btCrearAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearAutomovilActionPerformed
-        // TODO add your handling code here:
+        try{
+            String improntaAutomovil = txtImprontaAutomovil.getText();
+            int pasajerosAutomovil = Integer.parseInt(txtPasajerosAutomovil.getText());
+            int cantidadCombustibleAutomovil = Integer.parseInt(txtCantidadCombustibleAutomovil.getText());
+            String estadoAutomovil = cbEstadoAutomovil.getSelectedItem().toString();
+            String tipoCombustible = cbTipoCombustibleAutomovil.getSelectedItem().toString();
+
+            clsAutomovil automovil = new clsAutomovil(tipoCombustible,pasajerosAutomovil,cantidadCombustibleAutomovil,improntaAutomovil,estadoAutomovil);
+            ctrlVehiculo.CrearVehiculo(automovil);
+
+            vehiculos.add(automovil);
+            this.LimpiarFormulario();
+            this.Llenar_Lista();
+            JOptionPane.showMessageDialog(this,"Se creo el automovil con impronta: " + automovil.getImpronta_chasis() + "y tipo de combustible: " + automovil.getTipo_combustible());
+
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un automovil con  la información suministrada");
+        }
     }//GEN-LAST:event_btCrearAutomovilActionPerformed
 
     private void btConsultarAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarAutomovilActionPerformed
-        // TODO add your handling code here:
+        String improntaAutomovil = txtImprontaAutomovil.getText();
+        boolean encontrado = false;
+        for (clsVehiculo vehiculo: vehiculos){
+            if (vehiculo.getImpronta_chasis().equals(improntaAutomovil)){
+                clsAutomovil automovil = (clsAutomovil) vehiculo;
+                JOptionPane.showMessageDialog(this,"El automovil con placa: "
+                        + automovil.getImpronta_chasis() + "\n"
+                        +"Cantidad combustible: " + automovil.getCombustible()+"\n"+
+                        "Pasajeros: " + automovil.getPasajeros()+"\n"+
+                        "Estado Avion: " +automovil.getEstado_vehiculo()+"\n"+
+                        "Tipo Combustible: "+automovil.getTipo_combustible());
+                this.LimpiarFormulario();
+                this.Llenar_Lista();
+                encontrado = true;
+                break;
+            }
+        }
+        if (encontrado==false){
+            JOptionPane.showMessageDialog(this, "automovil no encontrado");
+        }
     }//GEN-LAST:event_btConsultarAutomovilActionPerformed
 
     private void btEditarAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarAutomovilActionPerformed
-        // TODO add your handling code here:
+        String improntaAutomovil = txtImprontaAutomovil.getText();
+        int cantidadCombustibleAutomovil = Integer.parseInt(txtCantidadCombustibleAutomovil.getText());
+        int pasajerosAutomovil =Integer.parseInt(txtPasajerosAutomovil.getText());
+        String estadoAutomovil = cbEstadoAutomovil.getSelectedItem().toString();
+        String tipoCombustibleAutomovil = cbTipoCombustibleAutomovil.getSelectedItem().toString();
+        boolean encontrado = false;
+
+        for(clsVehiculo vehiculo: vehiculos){
+            if (vehiculo.getImpronta_chasis().equals(improntaAutomovil)){
+                clsAutomovil automovil = (clsAutomovil) vehiculo;
+                automovil.setCombustible(cantidadCombustibleAutomovil);
+                automovil.setPasajeros(pasajerosAutomovil);
+                automovil.setEstado_vehiculo(estadoAutomovil);
+                automovil.setTipo_combustible(tipoCombustibleAutomovil);
+                this.vehiculos.remove(vehiculo);
+                this.vehiculos.add(automovil);
+                this.LimpiarFormulario();
+                this.Llenar_Lista();
+                JOptionPane.showMessageDialog(this, "El automovil con placa: "
+                        + automovil.getImpronta_chasis() + " fue actualizado");
+                encontrado = true;
+                break;
+            }
+            if (encontrado==false){
+                JOptionPane.showMessageDialog(this, "Automovil no encontrado");
+            }
+        }
     }//GEN-LAST:event_btEditarAutomovilActionPerformed
 
     private void btEliminarAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarAutomovilActionPerformed
