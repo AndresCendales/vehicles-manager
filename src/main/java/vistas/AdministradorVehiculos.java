@@ -1218,16 +1218,16 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         for (clsVehiculo vehiculo : vehiculos){
             if (vehiculo.tipoDeTransporte().equals("Pasajeros en vuelo")){
                 clsAvion avion = (clsAvion) vehiculo;
-                String datos = vehiculo.getImpronta_chasis()+ " - " + vehiculo.getPasajeros() + " - " + vehiculo.getCombustible() + " - " +vehiculo.getEstado_vehiculo() + " - "+ avion.getTipo_combustible();
+                String datos = "impronta: "+vehiculo.getImpronta_chasis()+ " - pasajeros: " + vehiculo.getPasajeros() + " - combustible: " + vehiculo.getCombustible() + " - Estado: " +vehiculo.getEstado_vehiculo() + " - "+ avion.getTipo_combustible();
                 model.add(index, datos);
                 index ++;  
             }else if(vehiculo.tipoDeTransporte().equals("Pasajeros en vehiculo terrestre")){
                 clsAutomovil automovil = (clsAutomovil) vehiculo;
-                String datos = vehiculo.getImpronta_chasis()+ " - " + vehiculo.getPasajeros() + " - " + vehiculo.getCombustible() + " - " +vehiculo.getEstado_vehiculo() + " - "+ automovil.getTipo_combustible();
+                String datos = "placa: "+vehiculo.getImpronta_chasis()+ " - pasajeros: " + vehiculo.getPasajeros() + " - combustible: " + vehiculo.getCombustible() + " - Estado: " +vehiculo.getEstado_vehiculo() + " - "+ automovil.getTipo_combustible();
                 model.add(index, datos);
                 index ++;  
             }else{            
-                String datos = vehiculo.getImpronta_chasis()+ " - " + vehiculo.getPasajeros() + " - " + vehiculo.getCombustible() + " - " +vehiculo.getEstado_vehiculo();
+                String datos = "impronta: "+vehiculo.getImpronta_chasis()+ " - pasajeros: " + vehiculo.getPasajeros() + " - combustible: " + vehiculo.getCombustible() + " - Estado: " +vehiculo.getEstado_vehiculo();
                 model.add(index, datos);
                 index ++;
             }
@@ -1252,7 +1252,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         DefaultListModel model = new DefaultListModel();
         int index = 0;
         for (clsMecanico mecanico: mecanicos){
-            String datos = mecanico.getNombre() + " - " + mecanico.getapellidos() + " - " + mecanico.getCertificado() + " - " + mecanico.getIdentificacion();
+            String datos = "Nombre: " + mecanico.getNombre() + " - Apellidos: " + mecanico.getapellidos() + " - Certificado: " + mecanico.getCertificado() + " - Identificacion: " + mecanico.getIdentificacion();
             model.add(index, datos);
             index++;
         }
