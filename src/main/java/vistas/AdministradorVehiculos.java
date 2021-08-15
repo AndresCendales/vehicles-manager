@@ -945,7 +945,22 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btConsultarMecanicoActionPerformed
 
     private void btEliminarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarMecanicoActionPerformed
-        // TODO add your handling code here:
+        int identificacionMecanico = Integer.parseInt(txtIdentificacion.getText());
+        boolean encontrado = false;
+        for (clsMecanico mecanico: this.mecanicos){
+            if (mecanico.getIdentificacion() == identificacionMecanico){
+                this.mecanicos.remove(mecanico);
+                this.LimpiarFormulariMecanicos();
+                this.LlenarListaMecanicos();
+                JOptionPane.showMessageDialog(this, "El Mecanico identificado con : "
+                        + mecanico.getIdentificacion() + " fue eliminado");
+                encontrado = true;
+                break;
+            }
+        }
+        if(encontrado==false){
+            JOptionPane.showMessageDialog(this, "Mecanico no encontrado");
+        }
     }//GEN-LAST:event_btEliminarMecanicoActionPerformed
 
     private void btEditarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarMecanicoActionPerformed
