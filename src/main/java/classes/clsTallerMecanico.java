@@ -11,13 +11,15 @@ public class clsTallerMecanico extends abstTalleres {
     private String nombre;
     private String direccion;
     private String telefono;
+    private int nit;
     private ArrayList<clsMecanico> Mecanicos;
 
-    public clsTallerMecanico(String nombre, String telefono, String direccion, ArrayList<clsMecanico> mecanicos) {
+    public clsTallerMecanico(String nombre, String telefono, String direccion, ArrayList<clsMecanico> mecanicos, int nit) {
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
         this.Mecanicos = mecanicos;
+        this.nit = nit;
     }
 
     public String getNombre() {
@@ -42,6 +44,14 @@ public class clsTallerMecanico extends abstTalleres {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public int getNit() {
+        return nit;
+    }
+
+    public void setNit(int nit) {
+        this.nit = nit;
     }
 
     public void Recibir_vehiculo(clsVehiculo vehiculo) {
@@ -99,6 +109,15 @@ public class clsTallerMecanico extends abstTalleres {
 
     public void Despedir_mecanico(clsMecanico mecanico) {
         this.Mecanicos.remove(mecanico);
+    }
+
+    public String getIdsMecanicos(){
+        StringBuilder ids;
+        ids = new StringBuilder();
+        for (clsMecanico mecanico: this.Mecanicos){
+            ids.append(mecanico.getIdentificacion()).append(",");
+        }
+        return ids.toString();
     }
 
 }

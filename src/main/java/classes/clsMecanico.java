@@ -13,11 +13,13 @@ public class clsMecanico {
     private String nombre;
     private String apellidos;
     private String certificado;
+    private int identificacion;
 
-    public clsMecanico(String nombre, String apellidos, String certificado) {
+    public clsMecanico(String nombre, String apellidos, String certificado, int identificacion) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.certificado = certificado;
+        this.identificacion = identificacion;
     }
 
     public String getNombre() {
@@ -47,5 +49,13 @@ public class clsMecanico {
     public void repararVehiculo(clsVehiculo vehiculo) {
         vehiculo.setEstado_vehiculo("Reparado");
         System.out.println("El mecanico" + this.nombre + " esta reparando el vehiculo con la impronta de chasis " + vehiculo.getImpronta_chasis() + ", el estado es " + vehiculo.getEstado_vehiculo());
+    }
+
+    public int getIdentificacion() {
+        return identificacion;
+    }
+
+    public void setIdentificacion(int identificacion) {
+        this.identificacion = identificacion;
     }
 }

@@ -5,11 +5,12 @@
  */
 package vistas;
 
-import classes.clsAutomovil;
-import classes.clsAvion;
-import classes.clsVehiculo;
+import classes.*;
 import controlador.ctrlVehiculo;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.stream.IntStream;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -20,12 +21,15 @@ import javax.swing.JOptionPane;
 public class AdministradorVehiculos extends javax.swing.JFrame {
     ctrlVehiculo ctrlVehiculo;
     LinkedList<clsVehiculo> vehiculos = new LinkedList<>();
-     
+    LinkedList<clsMecanico> mecanicos = new LinkedList<>();
+    LinkedList<clsTallerMecanico> talleresMecanicos = new LinkedList<>();
+
     /**
      * Creates new form AdministradorVehiculos
      */
     public AdministradorVehiculos() {
         initComponents();
+        this.ctrlVehiculo = new ctrlVehiculo();
     }
 
     /**
@@ -57,6 +61,21 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         btEditarVehiculo1 = new javax.swing.JButton();
         btCrearVehiculo = new javax.swing.JButton();
         btEliminarVehiculo = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        txtPlacaAutomovil = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        txtPasajerosAutomovil = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        txtCantidadCombustibleAutomovil = new javax.swing.JTextField();
+        cbEstadoAutomovil = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        cbTipoCombustibleAutomovil = new javax.swing.JComboBox<>();
+        btCrearAutomovil = new javax.swing.JButton();
+        btConsultarAutomovil = new javax.swing.JButton();
+        btEditarAutomovil = new javax.swing.JButton();
+        btEliminarAutomovil = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtImprontaAvion = new javax.swing.JTextField();
@@ -72,7 +91,43 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         btEditarAvion = new javax.swing.JButton();
         cbTipoCombustibleAvion = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lsListaMecanicos = new javax.swing.JList<>();
+        btCrearMecanico = new javax.swing.JButton();
+        btConsultarMecanico = new javax.swing.JButton();
+        btEliminarMecanico = new javax.swing.JButton();
+        btEditarMecanico = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        txtNombreMecanico = new javax.swing.JTextField();
+        txtApellidosMecanico = new javax.swing.JTextField();
+        txtCertificadoMecanico = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        txtIdentificacion = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lsListaTalleres = new javax.swing.JList<>();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        txtMecanicosTallerMecanico = new javax.swing.JTextField();
+        txtTelefonoTallerMecanico = new javax.swing.JTextField();
+        txtDireccionTallerMecanico = new javax.swing.JTextField();
+        txtNombreTallerMecanico = new javax.swing.JTextField();
+        btCrearTaller = new javax.swing.JButton();
+        btConsultarTaller = new javax.swing.JButton();
+        btEditarTaller = new javax.swing.JButton();
+        btEliminarTaller = new javax.swing.JButton();
+        jLabel28 = new javax.swing.JLabel();
+        txtNitTallerMecanico = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -98,7 +153,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,7 +162,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Lista de Vehiculos", jPanel1);
@@ -158,35 +213,30 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4))))
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCantidadCombustibleVehiculo)
-                                    .addComponent(txtPasajerosVehiculo)
-                                    .addComponent(txtImprontaVehiculo)
-                                    .addComponent(cbEstadoVehiculo, 0, 180, Short.MAX_VALUE))
-                                .addGap(29, 29, 29))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btEliminarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btEditarVehiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btCrearVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btConsultarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCantidadCombustibleVehiculo)
+                    .addComponent(txtPasajerosVehiculo)
+                    .addComponent(txtImprontaVehiculo)
+                    .addComponent(cbEstadoVehiculo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btConsultarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCrearVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(58, 58, 58)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btEliminarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btEditarVehiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +257,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(cbEstadoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCrearVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btEditarVehiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -220,13 +270,126 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Vehiculos", jPanel2);
 
+        jLabel11.setText("Placa");
+
+        jLabel12.setText("Pasajeros");
+
+        jLabel13.setText("Cantidad de Combustible");
+
+        cbEstadoAutomovil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En Funcionamiento", "Averiado", "Reparado", "En manteminiento" }));
+
+        jLabel14.setText("Estado del Automovil");
+
+        jLabel15.setText("Tipo Combustible");
+
+        cbTipoCombustibleAutomovil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Premium", "Diesel", "Corriente" }));
+
+        btCrearAutomovil.setText("Crear Automovil");
+        btCrearAutomovil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCrearAutomovilActionPerformed(evt);
+            }
+        });
+
+        btConsultarAutomovil.setText("Consultar Automovil");
+        btConsultarAutomovil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConsultarAutomovilActionPerformed(evt);
+            }
+        });
+
+        btEditarAutomovil.setText("Editar Automovil");
+        btEditarAutomovil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditarAutomovilActionPerformed(evt);
+            }
+        });
+
+        btEliminarAutomovil.setText("Eliminar Automovil");
+        btEliminarAutomovil.setToolTipText("");
+        btEliminarAutomovil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEliminarAutomovilActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13)))
+                    .addComponent(jLabel15))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCantidadCombustibleAutomovil)
+                    .addComponent(txtPasajerosAutomovil)
+                    .addComponent(txtPlacaAutomovil)
+                    .addComponent(cbEstadoAutomovil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbTipoCombustibleAutomovil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btCrearAutomovil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btConsultarAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btEditarAutomovil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btEliminarAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPlacaAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtPasajerosAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtCantidadCombustibleAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel14)
+                    .addComponent(cbEstadoAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cbTipoCombustibleAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btEditarAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCrearAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btEliminarAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btConsultarAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jTabbedPane2.addTab("Automoviles", jPanel4);
+
         jLabel5.setText("Impronta");
 
         jLabel7.setText("Pasajeros");
 
         jLabel8.setText("Cantidad de Combustible");
 
-        jLabel9.setText("Estado del Vehiculo");
+        jLabel9.setText("Estado del Avion");
 
         cbEstadoAvion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En Funcionamiento", "Averiado", "Reparado", "En manteminiento" }));
 
@@ -270,33 +433,32 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel9)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(1, 1, 1)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel8)))
-                        .addComponent(btCrearAvion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btConsultarAvion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel9)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)))
                     .addComponent(jLabel10))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCantidadCombustibleAvion)
-                            .addComponent(txtPasajerosAvion)
-                            .addComponent(txtImprontaAvion)
-                            .addComponent(cbEstadoAvion, 0, 180, Short.MAX_VALUE)
-                            .addComponent(cbTipoCombustibleAvion, 0, 180, Short.MAX_VALUE))
-                        .addGap(29, 29, 29))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btEliminarAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btEditarAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(txtCantidadCombustibleAvion)
+                    .addComponent(txtImprontaAvion)
+                    .addComponent(cbEstadoAvion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbTipoCombustibleAvion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPasajerosAvion))
+                .addGap(29, 29, 29))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(112, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btCrearAvion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btConsultarAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(62, 62, 62)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btEliminarAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btEditarAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,7 +483,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cbTipoCombustibleAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btEditarAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btCrearAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -334,40 +496,308 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Aviones", jPanel3);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
+        jLabel16.setText("Lista de Mecanicos");
+
+        lsListaMecanicos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(lsListaMecanicos);
+
+        btCrearMecanico.setText("Crear Mecanico");
+        btCrearMecanico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCrearMecanicoActionPerformed(evt);
+            }
+        });
+
+        btConsultarMecanico.setText("Consultar Mecanico");
+        btConsultarMecanico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConsultarMecanicoActionPerformed(evt);
+            }
+        });
+
+        btEliminarMecanico.setText("Eliminar Mecanico");
+        btEliminarMecanico.setToolTipText("");
+        btEliminarMecanico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEliminarMecanicoActionPerformed(evt);
+            }
+        });
+
+        btEditarMecanico.setText("Editar Mecanico");
+        btEditarMecanico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditarMecanicoActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setText("CRUD");
+
+        jLabel18.setText("Certificado");
+
+        jLabel19.setText("Apellidos");
+
+        jLabel20.setText("Nombre");
+
+        jLabel21.setText("Identificacion");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtCertificadoMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel19)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombreMecanico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtApellidosMecanico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 45, Short.MAX_VALUE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btCrearMecanico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btConsultarMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(62, 62, 62)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btEliminarMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btEditarMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel16)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 404, Short.MAX_VALUE)
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombreMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtApellidosMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCertificadoMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btEditarMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCrearMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btEliminarMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btConsultarMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jTabbedPane2.addTab("Automoviles", jPanel4);
+        jTabbedPane2.addTab("Mecanicos", jPanel5);
+
+        jScrollPane3.setViewportView(lsListaTalleres);
+
+        jLabel22.setText("Lista de Talleres");
+
+        jLabel23.setText("CRUD");
+
+        jLabel24.setText("Nombre");
+
+        jLabel25.setText("Direccion");
+
+        jLabel26.setText("Telefono");
+
+        jLabel27.setText("Mecanicos");
+
+        txtTelefonoTallerMecanico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoTallerMecanicoActionPerformed(evt);
+            }
+        });
+
+        btCrearTaller.setText("Crear Taller");
+        btCrearTaller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCrearTallerActionPerformed(evt);
+            }
+        });
+
+        btConsultarTaller.setText("Consultar Taller");
+        btConsultarTaller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConsultarTallerActionPerformed(evt);
+            }
+        });
+
+        btEditarTaller.setText("Editar Taller");
+        btEditarTaller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditarTallerActionPerformed(evt);
+            }
+        });
+
+        btEliminarTaller.setText("Eliminar Taller");
+        btEliminarTaller.setToolTipText("");
+        btEliminarTaller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEliminarTallerActionPerformed(evt);
+            }
+        });
+
+        jLabel28.setText("Nit");
+
+        jLabel29.setFont(new java.awt.Font("Noto Sans", 2, 10)); // NOI18N
+        jLabel29.setText("Ingrese las identificaciones de los mecanicos separados por coma.");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel25)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(txtDireccionTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel26)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtTelefonoTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNombreTallerMecanico)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel28)
+                        .addGap(63, 63, 63)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNitTallerMecanico)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel23)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel27)
+                        .addGap(11, 11, 11)
+                        .addComponent(txtMecanicosTallerMecanico))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(56, 56, 56))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btConsultarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCrearTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btEliminarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btEditarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNombreTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel24))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDireccionTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel25)
+                            .addComponent(txtTelefonoTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel26))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addComponent(txtNitTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel28)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMecanicosTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btConsultarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btEditarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btEliminarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCrearTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8))
+        );
+
+        jTabbedPane2.addTab("Talleres Mecanicos", jPanel6);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(104, 104, 104))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(169, 169, 169)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(31, 31, 31)
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();
@@ -375,18 +805,20 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
     private void btCrearVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearVehiculoActionPerformed
         try{
-        String improntaVehiculo = txtImprontaVehiculo.getText();
-        int pasajeros = Integer.parseInt(txtPasajerosVehiculo.getText());
-        int cantidadCombustible = Integer.parseInt(txtCantidadCombustibleVehiculo.getText());
-        String estadoVehiculo = cbEstadoVehiculo.getSelectedItem().toString();
-        
-        clsVehiculo vehiculo = new clsVehiculo(pasajeros,cantidadCombustible,improntaVehiculo,estadoVehiculo);
-            
-        vehiculos.add(vehiculo);
-        
-        Llenar_Lista();     
-        Limpiar_formulario();
-        JOptionPane.showMessageDialog(this, "Se instancio el vehiculo con la impronta: " + vehiculo.getImpronta_chasis()); 
+            String improntaVehiculo = txtImprontaVehiculo.getText();
+            int pasajeros = Integer.parseInt(txtPasajerosVehiculo.getText());
+            int cantidadCombustible = Integer.parseInt(txtCantidadCombustibleVehiculo.getText());
+            String estadoVehiculo = cbEstadoVehiculo.getSelectedItem().toString();
+
+            clsVehiculo vehiculo = new clsVehiculo(pasajeros,cantidadCombustible,improntaVehiculo,estadoVehiculo);
+
+            ctrlVehiculo.CrearVehiculo(vehiculo);
+
+            vehiculos.add(vehiculo);        
+            this.LlenarListaVehiculos();
+            this.LimpiarFormulariosVehiculos();
+
+            JOptionPane.showMessageDialog(this, "Se instancio el vehiculo con la impronta: " + vehiculo.getImpronta_chasis()); 
         } catch(Exception e){
             JOptionPane.showMessageDialog(this, "Corrija los datos ingresados.");
         }
@@ -397,7 +829,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         boolean encontrado=false;
         for (clsVehiculo vehiculo: vehiculos){
             if (vehiculo.getImpronta_chasis().equals(impronta_vehiculo)){
-                this.Limpiar_formulario();
+                this.LimpiarFormulariosVehiculos();
                 JOptionPane.showMessageDialog(this,"El vehiculo con chasis: " 
                         + vehiculo.getImpronta_chasis() + "\n"
                 +"Cantidad combustible: " + vehiculo.getCombustible()+"\n"+
@@ -416,22 +848,22 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private void btEditarVehiculo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarVehiculo1ActionPerformed
         String improntaVehiculo = txtImprontaVehiculo.getText();
         boolean encontrado=false;
-        for (clsVehiculo vehiculo: vehiculos){
-            if (vehiculo.getImpronta_chasis().equals(improntaVehiculo)){
+            for (clsVehiculo vehiculo: vehiculos){
+                if (vehiculo.getImpronta_chasis().equals(improntaVehiculo)){
                 vehiculo.setCombustible(Integer.parseInt(txtCantidadCombustibleVehiculo.getText()));
                 vehiculo.setPasajeros(Integer.parseInt(txtPasajerosVehiculo.getText()));
                 vehiculo.setEstado_vehiculo(cbEstadoVehiculo.getSelectedItem().toString());
-                this.Limpiar_formulario();
-                this.Llenar_Lista();
-                JOptionPane.showMessageDialog(this, "El vehiculo con chasis: " 
-                        + vehiculo.getImpronta_chasis() + " fue actualizado");
-                encontrado = true;
-                break;
+                    this.LimpiarFormulariosVehiculos();
+                    this.LlenarListaVehiculos();
+                    JOptionPane.showMessageDialog(this, "El vehiculo con chasis: " 
+                            + vehiculo.getImpronta_chasis() + " fue actualizado");
+                    encontrado = true;
+                    break;
+                }
             }
-        }
         
-        if (encontrado==false){
-            JOptionPane.showMessageDialog(this, "Vehículo no encontrado");
+            if (encontrado==false){
+                JOptionPane.showMessageDialog(this, "Vehículo no encontrado");
         }        
     }//GEN-LAST:event_btEditarVehiculo1ActionPerformed
 
@@ -441,8 +873,8 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         for (clsVehiculo vehiculo: vehiculos){
             if (vehiculo.getImpronta_chasis().equals(improntaVehiculo)){
                 this.vehiculos.remove(vehiculo);
-                this.Limpiar_formulario();
-                this.Llenar_Lista();
+                this.LimpiarFormulariosVehiculos();
+                this.LlenarListaVehiculos();
                 JOptionPane.showMessageDialog(this, "El vehiculo con chasis: " 
                         + vehiculo.getImpronta_chasis() + " fue eliminado");
                 encontrado = true;
@@ -459,15 +891,17 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
          try{
             String improntaChasisAvion = txtImprontaAvion.getText();
             int pasajerosAvion = Integer.parseInt(txtPasajerosAvion.getText());
-            int cantidadCombustible_avion = Integer.parseInt(txtCantidadCombustibleAvion.getText());
+            int cantidadCombustibleAvion = Integer.parseInt(txtCantidadCombustibleAvion.getText());
             String estadoAvion = cbEstadoAvion.getSelectedItem().toString();
             String tipoCombustibleAvion = cbTipoCombustibleAvion.getSelectedItem().toString();
             
-            clsAvion avion = new clsAvion(tipoCombustibleAvion, pasajerosAvion, cantidadCombustible_avion, improntaChasisAvion, estadoAvion);
-            vehiculos.add(avion);//polimorfismo puro
+            clsAvion avion = new clsAvion(tipoCombustibleAvion, pasajerosAvion, cantidadCombustibleAvion, improntaChasisAvion, estadoAvion);
             
-            this.Llenar_Lista();
+            ctrlVehiculo.CrearVehiculo(avion);
             
+            vehiculos.add(avion);
+            this.LimpiarFormulariosVehiculos();
+            this.LlenarListaVehiculos();
             JOptionPane.showMessageDialog(this, "Se creó el avión con impronta: " + avion.getImpronta_chasis() + " y tipo combustible: " + avion.getTipo_combustible());
             
         }catch (Exception e){
@@ -476,44 +910,375 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btCrearAvionActionPerformed
 
     private void btConsultarAvionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarAvionActionPerformed
-        String impronta_chasis = txtImprontaAvion.getText();      
-        clsAvion avion = (clsAvion) ctrlVehiculo.ConsultarVehiculo(impronta_chasis,"Pasajeros en vuelo");
-        if (avion==null){
-            JOptionPane.showMessageDialog(this, "Avion no encontrado");
-        } else{
-            txtPasajerosAvion.setText(avion.getPasajeros()+"");
-            txtCantidadCombustibleAvion.setText(avion.getCombustible()+"");
-            cbEstadoAvion.setSelectedItem(avion.getEstado_vehiculo());
-            cbTipoCombustibleAvion.setSelectedItem(avion.getTipo_combustible());
+        String improntaAvion = txtImprontaAvion.getText();
+        boolean encontrado=false;
+        for (clsVehiculo vehiculo: vehiculos){
+            if (vehiculo.getImpronta_chasis().equals(improntaAvion)){
+               clsAvion avion = (clsAvion)vehiculo;
+                JOptionPane.showMessageDialog(this,
+                        "El avion con chasis: "+ avion.getImpronta_chasis()+"\n" +
+                                "Cantidad combustible: " + avion.getCombustible()+"\n"+
+                                "Pasajeros: " + avion.getPasajeros()+"\n"+
+                                "Estado Avion: " +avion.getEstado_vehiculo()+"\n"+
+                                "Tipo Combustible: " + avion.getCombustible()
+                );
+                 this.LimpiarFormulariosVehiculos();
+                 this.LlenarListaVehiculos();
+                encontrado = true;
+                break;
+            }
+        }
+        
+        if (encontrado==false){
+            JOptionPane.showMessageDialog(this, "avion no encontrado");
         }
         
         
     }//GEN-LAST:event_btConsultarAvionActionPerformed
 
     private void btEliminarAvionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarAvionActionPerformed
-        // TODO add your handling code here:
+        String improntaAvion = txtImprontaAvion.getText();
+        boolean encontrado=false;
+        for (clsVehiculo avion: vehiculos ){
+            if (avion.getImpronta_chasis().equals(improntaAvion)){
+                this.vehiculos.remove(avion);
+                this.LimpiarFormulariosVehiculos();
+                this.LlenarListaVehiculos();
+                JOptionPane.showMessageDialog(this, "El avion con chasis: " 
+                    + avion.getImpronta_chasis() + " fue eliminado");
+                encontrado = true;
+                break;   
+            }
+        }
+                
+        if(encontrado==false){
+            JOptionPane.showMessageDialog(this, "Vehículo no encontrado");
+        }
+            
     }//GEN-LAST:event_btEliminarAvionActionPerformed
 
     private void btEditarAvionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarAvionActionPerformed
-        // TODO add your handling code here:
+        String improntaAvion = txtImprontaAvion.getText();
+        int cantidadCombustibleAvion = Integer.parseInt(txtCantidadCombustibleAvion.getText());
+        int pasajerosAvion =Integer.parseInt(txtPasajerosAvion.getText());
+        String estadoAvion = cbEstadoAvion.getSelectedItem().toString();
+        String tipoCombustibleAvion = cbTipoCombustibleAvion.getSelectedItem().toString();
+        boolean encontrado=false;
+
+        for (clsVehiculo vehiculo: vehiculos){
+            if (vehiculo.getImpronta_chasis().equals(improntaAvion)){
+                clsAvion avion = (clsAvion) vehiculo;
+                
+                avion.setCombustible(cantidadCombustibleAvion);
+                avion.setPasajeros(pasajerosAvion);
+                avion.setEstado_vehiculo(estadoAvion);
+                avion.setTipo_combustible(tipoCombustibleAvion);
+               
+                this.vehiculos.remove(vehiculo);
+                this.vehiculos.add(avion);
+                this.LimpiarFormulariosVehiculos();
+                this.LlenarListaVehiculos();
+                JOptionPane.showMessageDialog(this, "El vehiculo con chasis: " 
+                        + vehiculo.getImpronta_chasis() + " fue actualizado");
+                encontrado = true;
+                break;
+            }
+        }
+        
+        if (encontrado==false){
+            JOptionPane.showMessageDialog(this, "Vehículo no encontrado");
+        }        
     }//GEN-LAST:event_btEditarAvionActionPerformed
 
-    private void Llenar_Lista(){
+    private void btCrearAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearAutomovilActionPerformed
+        try{
+            String improntaAutomovil = txtPlacaAutomovil.getText();
+            int pasajerosAutomovil = Integer.parseInt(txtPasajerosAutomovil.getText());
+            int cantidadCombustibleAutomovil = Integer.parseInt(txtCantidadCombustibleAutomovil.getText());
+            String estadoAutomovil = cbEstadoAutomovil.getSelectedItem().toString();
+            String tipoCombustible = cbTipoCombustibleAutomovil.getSelectedItem().toString();
+
+            clsAutomovil automovil = new clsAutomovil(tipoCombustible,pasajerosAutomovil,cantidadCombustibleAutomovil,improntaAutomovil,estadoAutomovil);
+            ctrlVehiculo.CrearVehiculo(automovil);
+
+            vehiculos.add(automovil);
+            this.LimpiarFormulariosVehiculos();
+            this.LlenarListaVehiculos();
+            JOptionPane.showMessageDialog(this,"Se creo el automovil con impronta: " + automovil.getImpronta_chasis() + "y tipo de combustible: " + automovil.getTipo_combustible());
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un automovil con  la información suministrada");
+        }
+    }//GEN-LAST:event_btCrearAutomovilActionPerformed
+
+    private void btConsultarAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarAutomovilActionPerformed
+        String improntaAutomovil = txtPlacaAutomovil.getText();
+        boolean encontrado = false;
+        for (clsVehiculo vehiculo: vehiculos){
+            if (vehiculo.getImpronta_chasis().equals(improntaAutomovil)){
+                clsAutomovil automovil = (clsAutomovil) vehiculo;
+                JOptionPane.showMessageDialog(this,"El automovil con placa: "
+                        + automovil.getImpronta_chasis() + "\n"
+                        +"Cantidad combustible: " + automovil.getCombustible()+"\n"+
+                        "Pasajeros: " + automovil.getPasajeros()+"\n"+
+                        "Estado Avion: " +automovil.getEstado_vehiculo()+"\n"+
+                        "Tipo Combustible: "+automovil.getTipo_combustible());
+                this.LimpiarFormulariosVehiculos();
+                this.LlenarListaVehiculos();
+                encontrado = true;
+                break;
+            }
+        }
+        if (encontrado==false){
+            JOptionPane.showMessageDialog(this, "automovil no encontrado");
+        }
+    }//GEN-LAST:event_btConsultarAutomovilActionPerformed
+
+    private void btEditarAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarAutomovilActionPerformed
+        String improntaAutomovil = txtPlacaAutomovil.getText();
+        int cantidadCombustibleAutomovil = Integer.parseInt(txtCantidadCombustibleAutomovil.getText());
+        int pasajerosAutomovil =Integer.parseInt(txtPasajerosAutomovil.getText());
+        String estadoAutomovil = cbEstadoAutomovil.getSelectedItem().toString();
+        String tipoCombustibleAutomovil = cbTipoCombustibleAutomovil.getSelectedItem().toString();
+        boolean encontrado = false;
+
+        for(clsVehiculo vehiculo: vehiculos){
+            if (vehiculo.getImpronta_chasis().equals(improntaAutomovil)){
+                clsAutomovil automovil = (clsAutomovil) vehiculo;
+                automovil.setCombustible(cantidadCombustibleAutomovil);
+                automovil.setPasajeros(pasajerosAutomovil);
+                automovil.setEstado_vehiculo(estadoAutomovil);
+                automovil.setTipo_combustible(tipoCombustibleAutomovil);
+                this.vehiculos.remove(vehiculo);
+                this.vehiculos.add(automovil);
+                this.LimpiarFormulariosVehiculos();
+                this.LlenarListaVehiculos();
+                JOptionPane.showMessageDialog(this, "El automovil con placa: "
+                        + automovil.getImpronta_chasis() + " fue actualizado");
+                encontrado = true;
+                break;
+            }
+            if (encontrado==false){
+                JOptionPane.showMessageDialog(this, "Automovil no encontrado");
+            }
+        }
+    }//GEN-LAST:event_btEditarAutomovilActionPerformed
+
+    private void btEliminarAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarAutomovilActionPerformed
+        String placaAutomovil = txtPlacaAutomovil.getText();
+        boolean encontrado = false;
+        for (clsVehiculo vehiculo: this.vehiculos){
+            if (vehiculo.getImpronta_chasis().equals(placaAutomovil)){
+                this.vehiculos.remove(vehiculo);
+                this.LimpiarFormulariosVehiculos();
+                this.LlenarListaVehiculos();
+                JOptionPane.showMessageDialog(this, "El Automovil con placa: "
+                        + vehiculo.getImpronta_chasis() + " fue eliminado");
+                encontrado = true;
+                break;
+            }
+        }
+        if(encontrado==false){
+            JOptionPane.showMessageDialog(this, "Automovil no encontrado");
+        }
+    }//GEN-LAST:event_btEliminarAutomovilActionPerformed
+
+    private void btCrearMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearMecanicoActionPerformed
+        try{
+            String nombre = txtNombreMecanico.getText();
+            String apellidos = txtApellidosMecanico.getText();
+            String certificado = txtCertificadoMecanico.getText();
+            int identificacion = Integer.parseInt(txtIdentificacion.getText());
+            clsMecanico mecanico = new clsMecanico(nombre,apellidos,certificado,identificacion);
+
+            mecanicos.add(mecanico);
+            this.LimpiarFormulariMecanicos();
+            this.LlenarListaMecanicos();
+            JOptionPane.showMessageDialog(this,"Se creo el mecanico con nombre: " + mecanico.getNombre() + " Apellido: : " + mecanico.getapellidos() + " Certificado: " + mecanico.getCertificado());
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un mecanico con  la información suministrada");
+        }
+    }//GEN-LAST:event_btCrearMecanicoActionPerformed
+
+    private void btConsultarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarMecanicoActionPerformed
+        int identificacionMecanico = Integer.parseInt(txtIdentificacion.getText());
+        boolean encontrado = false;
+        for (clsMecanico mecanico: this.mecanicos){
+            if (mecanico.getIdentificacion() == identificacionMecanico){
+                JOptionPane.showMessageDialog(this,"El mecanico identificado con : "
+                        + mecanico.getIdentificacion() + "\n"
+                        +"Nombre: " + mecanico.getNombre()+"\n"+
+                        "Apellidos: " + mecanico.getapellidos()+"\n"+
+                        "Certificacion: " +mecanico.getCertificado()+"\n");
+                encontrado = true;
+                break;
+            }
+        }
+        if(encontrado==false){
+            JOptionPane.showMessageDialog(this, "Mecanico no encontrado");
+        }
+    }//GEN-LAST:event_btConsultarMecanicoActionPerformed
+
+    private void btEliminarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarMecanicoActionPerformed
+        int identificacionMecanico = Integer.parseInt(txtIdentificacion.getText());
+        boolean encontrado = false;
+        for (clsMecanico mecanico: this.mecanicos){
+            if (mecanico.getIdentificacion() == identificacionMecanico){
+                this.mecanicos.remove(mecanico);
+                this.LimpiarFormulariMecanicos();
+                this.LlenarListaMecanicos();
+                JOptionPane.showMessageDialog(this, "El Mecanico identificado con : "
+                        + mecanico.getIdentificacion() + " fue eliminado");
+                encontrado = true;
+                break;
+            }
+        }
+        if(encontrado==false){
+            JOptionPane.showMessageDialog(this, "Mecanico no encontrado");
+        }
+    }//GEN-LAST:event_btEliminarMecanicoActionPerformed
+
+    private void btEditarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarMecanicoActionPerformed
+        String nombreMecanico = txtNombreMecanico.getText();
+        String apellidoMecanico = txtApellidosMecanico.getText();
+        String certificado = txtCertificadoMecanico.getText();
+        int identificacion = Integer.parseInt(txtIdentificacion.getText());
+        boolean encontrado = false;
+        for(clsMecanico mecanico : this.mecanicos){
+            mecanico.setNombre(nombreMecanico);
+            mecanico.setapellidos(apellidoMecanico);
+            mecanico.setCertificado(certificado);
+            this.LimpiarFormulariMecanicos();
+            this.LlenarListaMecanicos();
+            JOptionPane.showMessageDialog(this, "El Mecanico identificado: "
+                    + mecanico.getIdentificacion() + " fue actualizado");
+            encontrado = true;
+            break;
+        }
+        if (encontrado==false){
+            JOptionPane.showMessageDialog(this, "Mecanico no encontrado");
+        }
+    }//GEN-LAST:event_btEditarMecanicoActionPerformed
+
+    private void btCrearTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearTallerActionPerformed
+        try{
+            String nombreTallerMecanico = txtNombreTallerMecanico.getText();
+            String telefonoTallerMecanico = txtTelefonoTallerMecanico.getText();
+            String direccionTallerMecanico = txtDireccionTallerMecanico.getText();
+            int nit = Integer.parseInt(txtNitTallerMecanico.getText());
+
+            String idMecanicosRaw = txtMecanicosTallerMecanico.getText();
+
+            // Parsear cada identificacion separada por coma a un int
+            idMecanicosRaw += ",";
+            String[] idMecanicosStr = idMecanicosRaw.split(",");
+            int[] idMecanicos = new int[idMecanicosStr.length];
+            for (int i = 0; i < idMecanicos.length; i++){
+                idMecanicos[i] = Integer.parseInt(idMecanicosStr[i]);
+            }
+
+            // Se consulta si los mecanicos que se estan relacionando en el form estan en el array de mecanicos previo
+            ArrayList<clsMecanico> mecanicos = new ArrayList();
+            for (clsMecanico m: this.mecanicos){
+                int id = m.getIdentificacion();
+                boolean contains = IntStream.of(idMecanicos).anyMatch(x -> x==id);
+                if (contains==true){
+                    mecanicos.add(m);
+                }
+            }
+
+            clsTallerMecanico tallerMecanico = new clsTallerMecanico(nombreTallerMecanico,telefonoTallerMecanico,direccionTallerMecanico,mecanicos,nit);
+
+            talleresMecanicos.add(tallerMecanico);
+            this.LimpiarFormulariTalleresMecanico();
+            this.LlenarListaTalleresMecanico();
+            JOptionPane.showMessageDialog(this,"Se creo el taller con nombre: " + tallerMecanico.getNombre() + " Direccion: : " + tallerMecanico.getDireccion() + " nit: " + tallerMecanico.getNit());
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un taller con  la información suministrada. Recuerde que debe tener creados previamente mecanicos para asociar al taller, y que debe incluir unicamente la identificacion de los mecanicos separados por coma sin espacios.");
+        }
+    }//GEN-LAST:event_btCrearTallerActionPerformed
+
+    private void btConsultarTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarTallerActionPerformed
+        int nit = Integer.parseInt(txtNitTallerMecanico.getText());
+        boolean encontrado = false;
+        for (clsTallerMecanico tallerMecanico: this.talleresMecanicos){
+            if (tallerMecanico.getNit() == nit){
+                JOptionPane.showMessageDialog(this,"El taller con nit numero: "
+                        + tallerMecanico.getNit() + "\n"
+                        +"Nombre: " + tallerMecanico.getNombre()+"\n"+
+                        "Direccion: " + tallerMecanico.getDireccion()+"\n"+
+                        "Telefono: " +tallerMecanico.getTelefono()+"\n"+
+                        "Identificaciones de los Mecanicos relacionados al taller: " + tallerMecanico.getIdsMecanicos());
+                encontrado = true;
+                break;
+            }
+        }
+        if(encontrado==false){
+            JOptionPane.showMessageDialog(this, "Taller no encontrado");
+        }
+    }//GEN-LAST:event_btConsultarTallerActionPerformed
+
+    private void btEditarTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarTallerActionPerformed
+        String nombreTallerMecanico = txtNombreTallerMecanico.getText();
+        String telefonoTallerMecanico = txtTelefonoTallerMecanico.getText();
+        String direccionTallerMecanico = txtDireccionTallerMecanico.getText();
+
+        boolean encontrado = false;
+        for(clsTallerMecanico tallerMecanico : this.talleresMecanicos){
+            tallerMecanico.setNombre(nombreTallerMecanico);
+            tallerMecanico.setDireccion(direccionTallerMecanico);
+            tallerMecanico.setTelefono(telefonoTallerMecanico);
+
+            this.LimpiarFormulariTalleresMecanico();
+            this.LlenarListaTalleresMecanico();
+            JOptionPane.showMessageDialog(this, "El Taller identificado con nit: "
+                    + tallerMecanico.getNit() + " fue actualizado");
+            encontrado = true;
+            break;
+        }
+        if (encontrado==false){
+            JOptionPane.showMessageDialog(this, "Taller no encontrado");
+        }
+    }//GEN-LAST:event_btEditarTallerActionPerformed
+
+    private void btEliminarTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarTallerActionPerformed
+        int nit = Integer.parseInt(txtNitTallerMecanico.getText());
+        boolean encontrado = false;
+        for (clsTallerMecanico tallerMecanico: this.talleresMecanicos){
+            if (tallerMecanico.getNit() == nit){
+                this.talleresMecanicos.remove(tallerMecanico);
+                this.LimpiarFormulariTalleresMecanico();
+                this.LlenarListaTalleresMecanico();
+                JOptionPane.showMessageDialog(this, "El Taller identificado con nit : "
+                        + tallerMecanico.getNit() + " fue eliminado");
+                encontrado = true;
+                break;
+            }
+        }
+        if(encontrado==false){
+            JOptionPane.showMessageDialog(this, "Taller no encontrado");
+        }
+    }//GEN-LAST:event_btEliminarTallerActionPerformed
+
+    private void txtTelefonoTallerMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoTallerMecanicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoTallerMecanicoActionPerformed
+
+    private void LlenarListaVehiculos(){
         DefaultListModel model = new DefaultListModel();
         int index=0;
         for (clsVehiculo vehiculo : vehiculos){
             if (vehiculo.tipoDeTransporte().equals("Pasajeros en vuelo")){
                 clsAvion avion = (clsAvion) vehiculo;
-                String datos = vehiculo.getImpronta_chasis()+ " - " + vehiculo.getPasajeros() + " - " + vehiculo.getCombustible() + " - " +vehiculo.getEstado_vehiculo() + " - "+ avion.getTipo_combustible();
+                String datos = "impronta: "+vehiculo.getImpronta_chasis()+ " - pasajeros: " + vehiculo.getPasajeros() + " - combustible: " + vehiculo.getCombustible() + " - Estado: " +vehiculo.getEstado_vehiculo() + " - "+ avion.getTipo_combustible();
                 model.add(index, datos);
                 index ++;  
             }else if(vehiculo.tipoDeTransporte().equals("Pasajeros en vehiculo terrestre")){
                 clsAutomovil automovil = (clsAutomovil) vehiculo;
-                String datos = vehiculo.getImpronta_chasis()+ " - " + vehiculo.getPasajeros() + " - " + vehiculo.getCombustible() + " - " +vehiculo.getEstado_vehiculo() + " - "+ automovil.getTipo_combustible();
+                String datos = "placa: "+vehiculo.getImpronta_chasis()+ " - pasajeros: " + vehiculo.getPasajeros() + " - combustible: " + vehiculo.getCombustible() + " - Estado: " +vehiculo.getEstado_vehiculo() + " - "+ automovil.getTipo_combustible();
                 model.add(index, datos);
                 index ++;  
             }else{            
-                String datos = vehiculo.getImpronta_chasis()+ " - " + vehiculo.getPasajeros() + " - " + vehiculo.getCombustible() + " - " +vehiculo.getEstado_vehiculo();
+                String datos = "impronta: "+vehiculo.getImpronta_chasis()+ " - pasajeros: " + vehiculo.getPasajeros() + " - combustible: " + vehiculo.getCombustible() + " - Estado: " +vehiculo.getEstado_vehiculo();
                 model.add(index, datos);
                 index ++;
             }
@@ -521,13 +1286,55 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         lsListaVehiculos.setModel(model);
     }
     
-    private void Limpiar_formulario(){
+    private void LimpiarFormulariosVehiculos(){
         txtImprontaVehiculo.setText("");
         txtPasajerosVehiculo.setText("");
         txtCantidadCombustibleVehiculo.setText("");
         cbEstadoVehiculo.setSelectedIndex(0);
+
+        txtImprontaAvion.setText("");
+        txtPasajerosAvion.setText("");
+        txtCantidadCombustibleAvion.setText("");
+        cbEstadoAvion.setSelectedIndex(0);
+        cbTipoCombustibleAvion.setSelectedIndex(0);
     }
-    
+
+    private void LlenarListaMecanicos(){
+        DefaultListModel model = new DefaultListModel();
+        int index = 0;
+        for (clsMecanico mecanico: mecanicos){
+            String datos = "Nombre: " + mecanico.getNombre() + " - Apellidos: " + mecanico.getapellidos() + " - Certificado: " + mecanico.getCertificado() + " - Identificacion: " + mecanico.getIdentificacion();
+            model.add(index, datos);
+            index++;
+        }
+        lsListaMecanicos.setModel(model);
+    }
+
+    private void LimpiarFormulariMecanicos(){
+        txtNombreMecanico.setText("");
+        txtApellidosMecanico.setText("");
+        txtCertificadoMecanico.setText("");
+        txtIdentificacion.setText("");
+    }
+
+    private void LlenarListaTalleresMecanico(){
+        DefaultListModel model = new DefaultListModel();
+        int index = 0;
+        for (clsTallerMecanico tallerMecanico: talleresMecanicos){
+            String datos = "Nombre: " + tallerMecanico.getNombre() + " - Direccion: " + tallerMecanico.getDireccion() + " - Nit: " + tallerMecanico.getNit() + " - Ids Mecanicos Afiliados: " + tallerMecanico.getIdsMecanicos();
+            model.add(index, datos);
+            index++;
+        }
+        lsListaTalleres.setModel(model);
+    }
+
+    private void LimpiarFormulariTalleresMecanico(){
+        txtNombreTallerMecanico.setText("");
+        txtDireccionTallerMecanico.setText("");
+        txtTelefonoTallerMecanico.setText("");
+        txtNitTallerMecanico.setText("");
+        txtMecanicosTallerMecanico.setText("");
+    }
     /**
      * @param args the command line arguments
      */
@@ -564,21 +1371,54 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btConsultarAutomovil;
     private javax.swing.JButton btConsultarAvion;
+    private javax.swing.JButton btConsultarMecanico;
+    private javax.swing.JButton btConsultarTaller;
     private javax.swing.JButton btConsultarVehiculo;
+    private javax.swing.JButton btCrearAutomovil;
     private javax.swing.JButton btCrearAvion;
+    private javax.swing.JButton btCrearMecanico;
+    private javax.swing.JButton btCrearTaller;
     private javax.swing.JButton btCrearVehiculo;
+    private javax.swing.JButton btEditarAutomovil;
     private javax.swing.JButton btEditarAvion;
+    private javax.swing.JButton btEditarMecanico;
+    private javax.swing.JButton btEditarTaller;
     private javax.swing.JButton btEditarVehiculo1;
+    private javax.swing.JButton btEliminarAutomovil;
     private javax.swing.JButton btEliminarAvion;
+    private javax.swing.JButton btEliminarMecanico;
+    private javax.swing.JButton btEliminarTaller;
     private javax.swing.JButton btEliminarVehiculo;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbEstadoAutomovil;
     private javax.swing.JComboBox<String> cbEstadoAvion;
     private javax.swing.JComboBox<String> cbEstadoVehiculo;
+    private javax.swing.JComboBox<String> cbTipoCombustibleAutomovil;
     private javax.swing.JComboBox<String> cbTipoCombustibleAvion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -590,15 +1430,33 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane2;
     private java.awt.Label label1;
+    private javax.swing.JList<String> lsListaMecanicos;
+    private javax.swing.JList<String> lsListaTalleres;
     private javax.swing.JList<String> lsListaVehiculos;
+    private javax.swing.JTextField txtApellidosMecanico;
+    private javax.swing.JTextField txtCantidadCombustibleAutomovil;
     private javax.swing.JTextField txtCantidadCombustibleAvion;
     private javax.swing.JTextField txtCantidadCombustibleVehiculo;
+    private javax.swing.JTextField txtCertificadoMecanico;
+    private javax.swing.JTextField txtDireccionTallerMecanico;
+    private javax.swing.JTextField txtIdentificacion;
     private javax.swing.JTextField txtImprontaAvion;
     private javax.swing.JTextField txtImprontaVehiculo;
+    private javax.swing.JTextField txtMecanicosTallerMecanico;
+    private javax.swing.JTextField txtNitTallerMecanico;
+    private javax.swing.JTextField txtNombreMecanico;
+    private javax.swing.JTextField txtNombreTallerMecanico;
+    private javax.swing.JTextField txtPasajerosAutomovil;
     private javax.swing.JTextField txtPasajerosAvion;
     private javax.swing.JTextField txtPasajerosVehiculo;
+    private javax.swing.JTextField txtPlacaAutomovil;
+    private javax.swing.JTextField txtTelefonoTallerMecanico;
     // End of variables declaration//GEN-END:variables
 }
