@@ -1192,12 +1192,28 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
             this.LlenarListaTalleresMecanico();
             JOptionPane.showMessageDialog(this,"Se creo el taller con nombre: " + tallerMecanico.getNombre() + " Direccion: : " + tallerMecanico.getDireccion() + " nit: " + tallerMecanico.getNit());
         }catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un taller con  la información suministrada");
+            JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un taller con  la información suministrada. Recuerde que debe tener creados previamente mecanicos para asociar al taller, y que debe incluir unicamente la identificacion de los mecanicos separados por coma sin espacios.");
         }
     }//GEN-LAST:event_btCrearTallerActionPerformed
 
     private void btConsultarTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarTallerActionPerformed
-        // TODO add your handling code here:
+        int nit = Integer.parseInt(txtNitTallerMecanico.getText());
+        boolean encontrado = false;
+        for (clsTallerMecanico tallerMecanico: this.talleresMecanicos){
+            if (tallerMecanico.getNit() == nit){
+                JOptionPane.showMessageDialog(this,"El taller con nit numero: "
+                        + tallerMecanico.getNit() + "\n"
+                        +"Nombre: " + tallerMecanico.getNombre()+"\n"+
+                        "Direccion: " + tallerMecanico.getDireccion()+"\n"+
+                        "Telefono: " +tallerMecanico.getTelefono()+"\n"+
+                        "Identificaciones de los Mecanicos relacionados al taller: " + tallerMecanico.getIdsMecanicos());
+                encontrado = true;
+                break;
+            }
+        }
+        if(encontrado==false){
+            JOptionPane.showMessageDialog(this, "Taller no encontrado");
+        }
     }//GEN-LAST:event_btConsultarTallerActionPerformed
 
     private void btEditarTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarTallerActionPerformed
