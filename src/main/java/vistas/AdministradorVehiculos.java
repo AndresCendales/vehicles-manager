@@ -1246,8 +1246,8 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         for (clsTallerMecanico tallerMecanico: this.talleresMecanicos){
             if (tallerMecanico.getNit() == nit){
                 this.talleresMecanicos.remove(tallerMecanico);
-                this.LimpiarFormulariMecanicos();
-                this.LlenarListaMecanicos();
+                this.LimpiarFormulariTalleresMecanico();
+                this.LlenarListaTalleresMecanico();
                 JOptionPane.showMessageDialog(this, "El Taller identificado con nit : "
                         + tallerMecanico.getNit() + " fue eliminado");
                 encontrado = true;
