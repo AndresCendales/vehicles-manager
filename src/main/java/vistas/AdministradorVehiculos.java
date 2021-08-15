@@ -106,6 +106,26 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         txtIdentificacion = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lsListaTalleres = new javax.swing.JList<>();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        txtNitTallerMecanico = new javax.swing.JTextField();
+        txtTelefonoTallerMecanico = new javax.swing.JTextField();
+        txtDireccionTallerMecanico = new javax.swing.JTextField();
+        txtNombreTallerMecanico = new javax.swing.JTextField();
+        btCrearTaller = new javax.swing.JButton();
+        btConsultarTaller = new javax.swing.JButton();
+        btEditarTaller = new javax.swing.JButton();
+        btEliminarTaller = new javax.swing.JButton();
+        jLabel28 = new javax.swing.JLabel();
+        txtNitTallerMecanico1 = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -131,7 +151,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +160,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(172, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Lista de Vehiculos", jPanel1);
@@ -214,7 +234,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btEliminarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btEditarVehiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,7 +255,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(cbEstadoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCrearVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btEditarVehiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -319,7 +339,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btCrearAutomovil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btConsultarAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btEditarAutomovil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btEliminarAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -348,7 +368,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cbTipoCombustibleAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btEditarAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btCrearAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -428,7 +448,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                     .addComponent(txtPasajerosAvion))
                 .addGap(29, 29, 29))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(84, Short.MAX_VALUE)
+                .addContainerGap(112, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btCrearAvion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btConsultarAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -461,7 +481,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cbTipoCombustibleAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btEditarAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btCrearAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -551,7 +571,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                         .addComponent(jLabel17)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 31, Short.MAX_VALUE)
+                        .addGap(0, 45, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -564,7 +584,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel16)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -587,7 +607,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCertificadoMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21))
@@ -603,27 +623,178 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Mecanicos", jPanel5);
 
+        jScrollPane3.setViewportView(lsListaTalleres);
+
+        jLabel22.setText("Lista de Talleres");
+
+        jLabel23.setText("CRUD");
+
+        jLabel24.setText("Nombre");
+
+        jLabel25.setText("Direccion");
+
+        jLabel26.setText("Telefono");
+
+        jLabel27.setText("Mecanicos");
+
+        txtTelefonoTallerMecanico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoTallerMecanicoActionPerformed(evt);
+            }
+        });
+
+        btCrearTaller.setText("Crear Taller");
+        btCrearTaller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCrearTallerActionPerformed(evt);
+            }
+        });
+
+        btConsultarTaller.setText("Consultar Taller");
+        btConsultarTaller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConsultarTallerActionPerformed(evt);
+            }
+        });
+
+        btEditarTaller.setText("Editar Taller");
+        btEditarTaller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditarTallerActionPerformed(evt);
+            }
+        });
+
+        btEliminarTaller.setText("Eliminar Taller");
+        btEliminarTaller.setToolTipText("");
+        btEliminarTaller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEliminarTallerActionPerformed(evt);
+            }
+        });
+
+        jLabel28.setText("Nit");
+
+        jLabel29.setFont(new java.awt.Font("Noto Sans", 2, 10)); // NOI18N
+        jLabel29.setText("Ingrese las identificaciones de los mecanicos separados por coma.");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btCrearTaller, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btConsultarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(62, 62, 62)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btEliminarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btEditarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel22)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel25)
+                                .addGroup(jPanel6Layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel6Layout.createSequentialGroup()
+                                    .addComponent(txtDireccionTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel26)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtTelefonoTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtNombreTallerMecanico)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                            .addComponent(jLabel28)
+                            .addGap(63, 63, 63)
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtNitTallerMecanico1)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                            .addComponent(jLabel23)
+                            .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                            .addComponent(jLabel27)
+                            .addGap(11, 11, 11)
+                            .addComponent(txtNitTallerMecanico))))
+                .addGap(56, 56, 56))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNombreTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel24))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDireccionTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel25)
+                            .addComponent(txtTelefonoTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel26))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtNitTallerMecanico1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel28)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNitTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btEditarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btCrearTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btEliminarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btConsultarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel29))))
+        );
+
+        jTabbedPane2.addTab("Talleres Mecanicos", jPanel6);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(169, 169, 169)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(169, 169, 169)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -964,8 +1135,59 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btEliminarMecanicoActionPerformed
 
     private void btEditarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarMecanicoActionPerformed
-        // TODO add your handling code here:
+        String nombreMecanico = txtNombreMecanico.getText();
+        String apellidoMecanico = txtApellidosMecanico.getText();
+        String certificado = txtCertificadoMecanico.getText();
+        int identificacion = Integer.parseInt(txtIdentificacion.getText());
+        boolean encontrado = false;
+        for(clsMecanico mecanico : this.mecanicos){
+            mecanico.setNombre(nombreMecanico);
+            mecanico.setapellidos(apellidoMecanico);
+            mecanico.setCertificado(certificado);
+            this.LimpiarFormulariMecanicos();
+            this.LlenarListaMecanicos();
+            JOptionPane.showMessageDialog(this, "El Mecanico identificado: "
+                    + mecanico.getIdentificacion() + " fue actualizado");
+            encontrado = true;
+            break;
+        }
+        if (encontrado==false){
+            JOptionPane.showMessageDialog(this, "Mecanico no encontrado");
+        }
     }//GEN-LAST:event_btEditarMecanicoActionPerformed
+
+    private void btCrearTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearTallerActionPerformed
+        try{
+            String nombreTallerMecanico = txtNombreTallerMecanico.getText();
+            String telefono = txtTelefonoTallerMecanico.getText();
+            String direccion = txtDireccionTallerMecanico.getText();
+            int nit = Integer.parseInt(txtNitTallerMecanico.getText());
+            clsMecanico mecanico = new clsMecanico(nombre,apellidos,certificado,identificacion);
+
+            mecanicos.add(mecanico);
+            this.LimpiarFormulariMecanicos();
+            this.LlenarListaMecanicos();
+            JOptionPane.showMessageDialog(this,"Se creo el mecanico con nombre: " + mecanico.getNombre() + " Apellido: : " + mecanico.getapellidos() + " Certificado: " + mecanico.getCertificado());
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un mecanico con  la información suministrada");
+        }
+    }//GEN-LAST:event_btCrearTallerActionPerformed
+
+    private void btConsultarTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarTallerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btConsultarTallerActionPerformed
+
+    private void btEditarTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarTallerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btEditarTallerActionPerformed
+
+    private void btEliminarTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarTallerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btEliminarTallerActionPerformed
+
+    private void txtTelefonoTallerMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoTallerMecanicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoTallerMecanicoActionPerformed
 
     private void LlenarListaVehiculos(){
         DefaultListModel model = new DefaultListModel();
@@ -1059,18 +1281,22 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private javax.swing.JButton btConsultarAutomovil;
     private javax.swing.JButton btConsultarAvion;
     private javax.swing.JButton btConsultarMecanico;
+    private javax.swing.JButton btConsultarTaller;
     private javax.swing.JButton btConsultarVehiculo;
     private javax.swing.JButton btCrearAutomovil;
     private javax.swing.JButton btCrearAvion;
     private javax.swing.JButton btCrearMecanico;
+    private javax.swing.JButton btCrearTaller;
     private javax.swing.JButton btCrearVehiculo;
     private javax.swing.JButton btEditarAutomovil;
     private javax.swing.JButton btEditarAvion;
     private javax.swing.JButton btEditarMecanico;
+    private javax.swing.JButton btEditarTaller;
     private javax.swing.JButton btEditarVehiculo1;
     private javax.swing.JButton btEliminarAutomovil;
     private javax.swing.JButton btEliminarAvion;
     private javax.swing.JButton btEliminarMecanico;
+    private javax.swing.JButton btEliminarTaller;
     private javax.swing.JButton btEliminarVehiculo;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbEstadoAutomovil;
@@ -1092,6 +1318,14 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1104,24 +1338,32 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane2;
     private java.awt.Label label1;
     private javax.swing.JList<String> lsListaMecanicos;
+    private javax.swing.JList<String> lsListaTalleres;
     private javax.swing.JList<String> lsListaVehiculos;
     private javax.swing.JTextField txtApellidosMecanico;
     private javax.swing.JTextField txtCantidadCombustibleAutomovil;
     private javax.swing.JTextField txtCantidadCombustibleAvion;
     private javax.swing.JTextField txtCantidadCombustibleVehiculo;
     private javax.swing.JTextField txtCertificadoMecanico;
+    private javax.swing.JTextField txtDireccionTallerMecanico;
     private javax.swing.JTextField txtIdentificacion;
     private javax.swing.JTextField txtImprontaAvion;
     private javax.swing.JTextField txtImprontaVehiculo;
+    private javax.swing.JTextField txtNitTallerMecanico;
+    private javax.swing.JTextField txtNitTallerMecanico1;
     private javax.swing.JTextField txtNombreMecanico;
+    private javax.swing.JTextField txtNombreTallerMecanico;
     private javax.swing.JTextField txtPasajerosAutomovil;
     private javax.swing.JTextField txtPasajerosAvion;
     private javax.swing.JTextField txtPasajerosVehiculo;
     private javax.swing.JTextField txtPlacaAutomovil;
+    private javax.swing.JTextField txtTelefonoTallerMecanico;
     // End of variables declaration//GEN-END:variables
 }
