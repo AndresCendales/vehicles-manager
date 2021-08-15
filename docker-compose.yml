@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: usr
+      POSTGRES_PASSWORD: pswd
+      POSTGRES_DB: vehicles-manager
+      POSTGRES_HOST: db
+    ports:
+      - '5432:5432'
