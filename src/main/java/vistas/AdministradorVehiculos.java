@@ -5,12 +5,12 @@
  */
 package vistas;
 
-import classes.clsAutomovil;
-import classes.clsAvion;
-import classes.clsMecanico;
-import classes.clsVehiculo;
+import classes.*;
 import controlador.ctrlVehiculo;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.stream.IntStream;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -22,6 +22,8 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     ctrlVehiculo ctrlVehiculo;
     LinkedList<clsVehiculo> vehiculos = new LinkedList<>();
     LinkedList<clsMecanico> mecanicos = new LinkedList<>();
+    LinkedList<clsTallerMecanico> talleresMecanicos = new LinkedList<>();
+
     /**
      * Creates new form AdministradorVehiculos
      */
@@ -115,7 +117,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        txtNitTallerMecanico = new javax.swing.JTextField();
+        txtMecanicosTallerMecanico = new javax.swing.JTextField();
         txtTelefonoTallerMecanico = new javax.swing.JTextField();
         txtDireccionTallerMecanico = new javax.swing.JTextField();
         txtNombreTallerMecanico = new javax.swing.JTextField();
@@ -124,7 +126,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         btEditarTaller = new javax.swing.JButton();
         btEliminarTaller = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
-        txtNitTallerMecanico1 = new javax.swing.JTextField();
+        txtNitTallerMecanico = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -716,14 +718,14 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                             .addGap(63, 63, 63)
                             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtNitTallerMecanico1)))
+                                .addComponent(txtNitTallerMecanico)))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
                             .addComponent(jLabel23)
                             .addGap(0, 0, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
                             .addComponent(jLabel27)
                             .addGap(11, 11, 11)
-                            .addComponent(txtNitTallerMecanico))))
+                            .addComponent(txtMecanicosTallerMecanico))))
                 .addGap(56, 56, 56))
         );
         jPanel6Layout.setVerticalGroup(
@@ -748,13 +750,13 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                             .addComponent(txtTelefonoTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel26))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtNitTallerMecanico1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtNitTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel28)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNitTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMecanicosTallerMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel27))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -1159,17 +1161,38 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private void btCrearTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearTallerActionPerformed
         try{
             String nombreTallerMecanico = txtNombreTallerMecanico.getText();
-            String telefono = txtTelefonoTallerMecanico.getText();
-            String direccion = txtDireccionTallerMecanico.getText();
+            String telefonoTallerMecanico = txtTelefonoTallerMecanico.getText();
+            String direccionTallerMecanico = txtDireccionTallerMecanico.getText();
             int nit = Integer.parseInt(txtNitTallerMecanico.getText());
-            clsMecanico mecanico = new clsMecanico(nombre,apellidos,certificado,identificacion);
 
-            mecanicos.add(mecanico);
-            this.LimpiarFormulariMecanicos();
-            this.LlenarListaMecanicos();
-            JOptionPane.showMessageDialog(this,"Se creo el mecanico con nombre: " + mecanico.getNombre() + " Apellido: : " + mecanico.getapellidos() + " Certificado: " + mecanico.getCertificado());
+            String idMecanicosRaw = txtMecanicosTallerMecanico.getText();
+
+            // Parsear cada identificacion separada por coma a un int
+            idMecanicosRaw += ",";
+            String[] idMecanicosStr = idMecanicosRaw.split(",");
+            int[] idMecanicos = new int[idMecanicosStr.length];
+            for (int i = 0; i < idMecanicos.length; i++){
+                idMecanicos[i] = Integer.parseInt(idMecanicosStr[i]);
+            }
+
+            // Se consulta si los mecanicos que se estan relacionando en el form estan en el array de mecanicos previo
+            ArrayList<clsMecanico> mecanicos = new ArrayList();
+            for (clsMecanico m: this.mecanicos){
+                int id = m.getIdentificacion();
+                boolean contains = IntStream.of(idMecanicos).anyMatch(x -> x==id);
+                if (contains==true){
+                    mecanicos.add(m);
+                }
+            }
+
+            clsTallerMecanico tallerMecanico = new clsTallerMecanico(nombreTallerMecanico,telefonoTallerMecanico,direccionTallerMecanico,mecanicos,nit);
+
+            talleresMecanicos.add(tallerMecanico);
+            this.LimpiarFormulariTalleresMecanico();
+            this.LlenarListaTalleresMecanico();
+            JOptionPane.showMessageDialog(this,"Se creo el taller con nombre: " + tallerMecanico.getNombre() + " Direccion: : " + tallerMecanico.getDireccion() + " nit: " + tallerMecanico.getNit());
         }catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un mecanico con  la información suministrada");
+            JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un taller con  la información suministrada");
         }
     }//GEN-LAST:event_btCrearTallerActionPerformed
 
@@ -1241,6 +1264,25 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         txtApellidosMecanico.setText("");
         txtCertificadoMecanico.setText("");
         txtIdentificacion.setText("");
+    }
+
+    private void LlenarListaTalleresMecanico(){
+        DefaultListModel model = new DefaultListModel();
+        int index = 0;
+        for (clsTallerMecanico tallerMecanico: talleresMecanicos){
+            String datos = "Nombre: " + tallerMecanico.getNombre() + " - Direccion: " + tallerMecanico.getDireccion() + " - Nit: " + tallerMecanico.getNit() + " - Ids Mecanicos Afiliados: " + tallerMecanico.getIdsMecanicos();
+            model.add(index, datos);
+            index++;
+        }
+        lsListaTalleres.setModel(model);
+    }
+
+    private void LimpiarFormulariTalleresMecanico(){
+        txtNombreTallerMecanico.setText("");
+        txtDireccionTallerMecanico.setText("");
+        txtTelefonoTallerMecanico.setText("");
+        txtNitTallerMecanico.setText("");
+        txtMecanicosTallerMecanico.setText("");
     }
     /**
      * @param args the command line arguments
@@ -1356,8 +1398,8 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private javax.swing.JTextField txtIdentificacion;
     private javax.swing.JTextField txtImprontaAvion;
     private javax.swing.JTextField txtImprontaVehiculo;
+    private javax.swing.JTextField txtMecanicosTallerMecanico;
     private javax.swing.JTextField txtNitTallerMecanico;
-    private javax.swing.JTextField txtNitTallerMecanico1;
     private javax.swing.JTextField txtNombreMecanico;
     private javax.swing.JTextField txtNombreTallerMecanico;
     private javax.swing.JTextField txtPasajerosAutomovil;

@@ -111,4 +111,13 @@ public class clsTallerMecanico extends abstTalleres {
         this.Mecanicos.remove(mecanico);
     }
 
+    public String getIdsMecanicos(){
+        StringBuilder ids;
+        ids = new StringBuilder();
+        for (clsMecanico mecanico: this.Mecanicos){
+            ids.append(mecanico.getIdentificacion()).append(",");
+        }
+        return ids.toString();
+    }
+
 }
