@@ -50,7 +50,7 @@
               <Component id="label1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Component id="jTabbedPane2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="12" max="32767" attributes="0"/>
+              <EmptySpace pref="10" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -97,7 +97,7 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="180" max="32767" attributes="0"/>
+                      <EmptySpace pref="182" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -207,7 +207,7 @@
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <Component id="cbEstadoVehiculo" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="118" max="32767" attributes="0"/>
+                      <EmptySpace pref="120" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btCrearVehiculo" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="btEditarVehiculo1" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
@@ -378,7 +378,7 @@
                           <Component id="cbTipoCombustibleAutomovil" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="jLabel15" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="60" max="32767" attributes="0"/>
+                      <EmptySpace pref="62" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btEditarAutomovil" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="btCrearAutomovil" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
@@ -568,7 +568,7 @@
                           <Component id="cbTipoCombustibleAvion" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="60" max="32767" attributes="0"/>
+                      <EmptySpace pref="62" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btEditarAvion" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="btCrearAvion" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
@@ -951,21 +951,15 @@
                       <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="btConsultarTaller" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="btCrearTaller" min="-2" pref="180" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="btCrearTaller" min="-2" pref="180" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                              <Component id="btConsultarTaller" min="-2" pref="180" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btEditarTaller" min="-2" pref="180" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
-                              <Component id="btAnadirMecanicoTaller" min="-2" pref="180" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                              <Component id="btEliminarTaller" min="-2" pref="180" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="btEliminarTaller" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="btEditarTaller" min="-2" pref="180" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -994,7 +988,7 @@
                                   <Component id="txtTelefonoTallerMecanico" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                                   <Component id="jLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="12" max="32767" attributes="0"/>
                               <Component id="txtNitTallerMecanico" min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -1009,16 +1003,15 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btCrearTaller" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="btConsultarTaller" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="btEditarTaller" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btAnadirMecanicoTaller" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="btEliminarTaller" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="btCrearTaller" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   </Group>
@@ -1133,14 +1126,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ingrese las identificaciones de los mecanicos separados por coma."/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="btAnadirMecanicoTaller">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="A&#xf1;adir Mecanico "/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAnadirMecanicoTallerActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
