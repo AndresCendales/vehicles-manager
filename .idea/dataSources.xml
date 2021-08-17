@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="PostgreSQL - vehicles-manager@localhost" uuid="bd75bb25-ed0c-4473-9fa5-4fce66879d5f">
-      <driver-ref>postgresql</driver-ref>
+    <data-source source="LOCAL" name="MySQL - vehicles-manager@localhost" uuid="9cfb232a-c42b-4126-be55-4f43f67ad587">
+      <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/vehicles-manager</jdbc-url>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/vehicles-manager</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
