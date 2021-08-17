@@ -32,7 +32,7 @@ public class ctrlVehiculo {
             if (vehiculo.tipoDeTransporte().equals("Pasajeros en vuelo"))  {
                 this.mdlAvion.CrearAvion((clsAvion) vehiculo);
             }else if (vehiculo.tipoDeTransporte().equals("Pasajeros en vehiculo terrestre")){
-                this.mdlAutomovil.CrearVehiculo((clsAutomovil) vehiculo);
+                this.mdlAutomovil.CrearAutomovil((clsAutomovil) vehiculo);
             }else{
                 this.mdlVehiculo.CrearVehiculo(vehiculo);
             }
@@ -49,7 +49,7 @@ public class ctrlVehiculo {
                 vehiculo =  this.mdlAvion.ConsultarAvion(impronta_vehiculo);
                 return vehiculo;
             }else if (tipo_vehiculo.equals("Pasajeros en vehiculo terrestre")){
-                vehiculo =this.mdlAutomovil.ConsultarVehiculo(impronta_vehiculo);
+                vehiculo =this.mdlAutomovil.ConsultarAutomovil(impronta_vehiculo);
                 return vehiculo;
             }else{
                 vehiculo =this.mdlVehiculo.ConsultarVehiculo(impronta_vehiculo);
@@ -67,7 +67,7 @@ public class ctrlVehiculo {
                 bandera=this.mdlAvion.EditarAvion((clsAvion) vehiculo);
                 return bandera;
             }else if (vehiculo.tipoDeTransporte().equals("Pasajeros en vehiculo terrestre")){
-                bandera=this.mdlAutomovil.EditarVehiculo((clsAutomovil) vehiculo);
+                bandera=this.mdlAutomovil.EditarAutomovil((clsAutomovil) vehiculo);
                 return bandera;
             }else{
                 bandera=this.mdlVehiculo.EditarVehiculo(vehiculo);
@@ -85,7 +85,7 @@ public class ctrlVehiculo {
                 bandera=this.mdlAvion.EliminarAvion(improntaVehiculo);
                 return bandera;
             }else if (tipoTransporte == "Pasajeros en vehiculo terrestre"){
-                bandera=this.mdlAutomovil.EliminarVehiculo(improntaVehiculo);
+                bandera=this.mdlAutomovil.EliminarAutomovil(improntaVehiculo);
                 return bandera;
             }else{
                 bandera=this.mdlVehiculo.EliminarVehiculo(improntaVehiculo);

@@ -935,6 +935,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
             cbEstadoAvion.setSelectedItem(avion.getEstado_vehiculo());
             cbTipoCombustibleAvion.setSelectedItem(avion.getTipo_combustible());
             txtMotoresAvion.setText(avion.getNumero_motores()+"");
+            JOptionPane.showMessageDialog(this, "avion encontrado satisfactoriamente");
         }
     }//GEN-LAST:event_btConsultarAvionActionPerformed
 
@@ -948,6 +949,8 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "avion no encontrado");
         }
+        this.LimpiarFormulariosVehiculos();
+        this.LlenarListaVehiculos();
     }//GEN-LAST:event_btEliminarAvionActionPerformed
 
     private void btEditarAvionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarAvionActionPerformed
@@ -983,10 +986,14 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
             boolean ok = ctrlVehiculo.CrearVehiculo(automovil); //ToDo: Conectar modelo con db
 
-            vehiculos.add(automovil);
-            this.LimpiarFormulariosVehiculos();
-            this.LlenarListaVehiculos();
-            JOptionPane.showMessageDialog(this,"Se creo el automovil con impronta: " + automovil.getImpronta_chasis() + "   y tipo de combustible: " + automovil.getTipo_combustible());
+            if (ok) {
+                vehiculos.add(automovil);
+                this.LimpiarFormulariosVehiculos();
+                this.LlenarListaVehiculos();
+                JOptionPane.showMessageDialog(this, "Se creo el automovil con impronta: " + automovil.getImpronta_chasis() + "   y tipo de combustible: " + automovil.getTipo_combustible());
+            } else {
+                JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un automovil con  la información suministrada");
+            }
         } catch (Exception e){
             JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un automovil con  la información suministrada");
         }
@@ -995,26 +1002,17 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private void btConsultarAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarAutomovilActionPerformed
         String improntaAutomovil = txtPlacaAutomovil.getText();
 
-        clsVehiculo v = ctrlVehiculo.ConsultarVehiculo(improntaAutomovil,"Pasajeros en vehiculo terrestre"); //ToDo: Conectar modelos con DB
+        clsAutomovil automovil = (clsAutomovil) ctrlVehiculo.ConsultarVehiculo(improntaAutomovil,"Pasajeros en vehiculo terrestre");
 
-        boolean encontrado = false;
-        for (clsVehiculo vehiculo: vehiculos){
-            if (vehiculo.getImpronta_chasis().equals(improntaAutomovil)){
-                clsAutomovil automovil = (clsAutomovil) vehiculo;
-                JOptionPane.showMessageDialog(this,"El automovil con placa: "
-                        + automovil.getImpronta_chasis() + "\n"
-                        +"Cantidad combustible: " + automovil.getCombustible()+"\n"+
-                        "Pasajeros: " + automovil.getPasajeros()+"\n"+
-                        "Estado Avion: " +automovil.getEstado_vehiculo()+"\n"+
-                        "Tipo Combustible: "+automovil.getTipo_combustible());
-                this.LimpiarFormulariosVehiculos();
-                this.LlenarListaVehiculos();
-                encontrado = true;
-                break;
-            }
-        }
-        if (encontrado==false){
+        if (automovil==null){
             JOptionPane.showMessageDialog(this, "automovil no encontrado");
+        } else{
+            txtPlacaAutomovil.setText(automovil.getImpronta_chasis()+"");
+            txtPasajerosAutomovil.setText(automovil.getPasajeros()+"");
+            txtCantidadCombustibleAutomovil.setText(automovil.getCombustible()+"");
+            cbEstadoAutomovil.setSelectedItem(automovil.getEstado_vehiculo());
+            cbTipoCombustibleAutomovil.setSelectedItem(automovil.getTipo_combustible());
+            JOptionPane.showMessageDialog(this, "automovil encontrado satisfactoriamente");
         }
     }//GEN-LAST:event_btConsultarAutomovilActionPerformed
 
@@ -1026,50 +1024,27 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         String tipoCombustibleAutomovil = cbTipoCombustibleAutomovil.getSelectedItem().toString();
 
         boolean ok = ctrlVehiculo.EditarVehiculo(new clsAutomovil(tipoCombustibleAutomovil,pasajerosAutomovil,cantidadCombustibleAutomovil,improntaAutomovil,estadoAutomovil)); //ToDo: Conectar modelos con DB
-
-        boolean encontrado = false;
-        for(clsVehiculo vehiculo: vehiculos){
-            if (vehiculo.getImpronta_chasis().equals(improntaAutomovil)){
-                clsAutomovil automovil = (clsAutomovil) vehiculo;
-                automovil.setCombustible(cantidadCombustibleAutomovil);
-                automovil.setPasajeros(pasajerosAutomovil);
-                automovil.setEstado_vehiculo(estadoAutomovil);
-                automovil.setTipo_combustible(tipoCombustibleAutomovil);
-                this.vehiculos.remove(vehiculo);
-                this.vehiculos.add(automovil);
+        if (ok) {
                 this.LimpiarFormulariosVehiculos();
                 this.LlenarListaVehiculos();
                 JOptionPane.showMessageDialog(this, "El automovil con placa: "
-                        + automovil.getImpronta_chasis() + " fue actualizado");
-                encontrado = true;
-                break;
-            }
-        }
-        if (encontrado==false){
-            JOptionPane.showMessageDialog(this, "Automovil no encontrado");
+                        + improntaAutomovil + " fue actualizado");
+        } else {
+            JOptionPane.showMessageDialog(this, "El automovil con placa: "
+                    + improntaAutomovil + " fue NO actualizado");
         }
     }//GEN-LAST:event_btEditarAutomovilActionPerformed
 
     private void btEliminarAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarAutomovilActionPerformed
         String placaAutomovil = txtPlacaAutomovil.getText();
-
-        boolean ok = ctrlVehiculo.EliminarVehiculo(placaAutomovil,"Pasajeros en vehiculo terrestre"); // ToDo: Conectar modelos con db
-
-        boolean encontrado = false;
-        for (clsVehiculo vehiculo: this.vehiculos){
-            if (vehiculo.getImpronta_chasis().equals(placaAutomovil)){
-                this.vehiculos.remove(vehiculo);
-                this.LimpiarFormulariosVehiculos();
-                this.LlenarListaVehiculos();
-                JOptionPane.showMessageDialog(this, "El Automovil con placa: "
-                        + vehiculo.getImpronta_chasis() + " fue eliminado");
-                encontrado = true;
-                break;
-            }
-        }
-        if(encontrado==false){
+        boolean ok = ctrlVehiculo.EliminarVehiculo(placaAutomovil,"Pasajeros en vehiculo terrestre");
+        if (ok){
+            JOptionPane.showMessageDialog(this, "Automovil con placa: "+ placaAutomovil + " fue eliminado.");
+        } else {
             JOptionPane.showMessageDialog(this, "Automovil no encontrado");
         }
+        this.LimpiarFormulariosVehiculos();
+        this.LlenarListaVehiculos();
     }//GEN-LAST:event_btEliminarAutomovilActionPerformed
 
     private void btCrearMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearMecanicoActionPerformed
