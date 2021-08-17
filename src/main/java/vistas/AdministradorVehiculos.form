@@ -50,7 +50,7 @@
               <Component id="label1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Component id="jTabbedPane2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="10" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -97,7 +97,7 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="238" max="32767" attributes="0"/>
+                      <EmptySpace pref="270" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -201,7 +201,7 @@
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <Component id="cbEstadoVehiculo" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="120" max="32767" attributes="0"/>
+                      <EmptySpace pref="152" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btCrearVehiculo" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="btEditarVehiculo1" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
@@ -382,7 +382,7 @@
                           <Component id="btEliminarAutomovil" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="btConsultarAutomovil" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="37" max="32767" attributes="0"/>
+                      <EmptySpace pref="69" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -498,24 +498,36 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" alignment="0" min="-2" pref="65" max="-2" attributes="0"/>
-                                  <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                      <Component id="jLabel5" min="-2" pref="65" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtCantidadCombustibleAvion" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtImprontaAvion" alignment="0" max="32767" attributes="0"/>
-                          <Component id="cbEstadoAvion" alignment="0" pref="346" max="32767" attributes="0"/>
+                          <Component id="cbEstadoAvion" alignment="0" max="32767" attributes="0"/>
                           <Component id="cbTipoCombustibleAvion" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtPasajerosAvion" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="txtPasajerosAvion" min="-2" pref="131" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtMotoresAvion" min="-2" pref="131" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   </Group>
@@ -538,21 +550,25 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtImprontaAvion" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="txtPasajerosAvion" alignment="1" min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="txtImprontaAvion" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="txtCantidadCombustibleAvion" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="txtCantidadCombustibleAvion" alignment="1" min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPasajerosAvion" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtMotoresAvion" alignment="1" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="jLabel17" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="cbEstadoAvion" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
@@ -572,7 +588,7 @@
                           <Component id="btEliminarAvion" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="btConsultarAvion" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="35" max="32767" attributes="0"/>
+                      <EmptySpace pref="47" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -670,6 +686,13 @@
                 <Property name="text" type="java.lang.String" value="Tipo Combustible"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JTextField" name="txtMotoresAvion">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel17">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="motores"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel5">
@@ -764,7 +787,7 @@
                           <Component id="txtCertificadoMecanico" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                           <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="16" max="32767" attributes="0"/>
+                      <EmptySpace pref="48" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtIdentificacion" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                           <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -988,7 +1011,7 @@
                           <Component id="btEliminarTaller" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="btCrearTaller" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="17" max="32767" attributes="0"/>
+                      <EmptySpace pref="49" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

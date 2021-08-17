@@ -11,10 +11,12 @@ package classes;
  */
 public class clsAvion extends clsVehiculo {
     private String tipo_combustible;
+    private int numero_motores;
 
-    public clsAvion(String tipo_combustible, int pasajeros, int combustible, String impronta_chasis, String estado_vehiculo) {
+    public clsAvion(String tipo_combustible, int pasajeros, int combustible, String impronta_chasis, String estado_vehiculo, int numero_motores) {
         super(pasajeros, combustible, impronta_chasis, estado_vehiculo);
         this.tipo_combustible = tipo_combustible;
+        this.numero_motores = numero_motores;
     }
 
     public String getTipo_combustible() {
@@ -50,5 +52,13 @@ public class clsAvion extends clsVehiculo {
     @Override
     public int revisarOctanaje() {
         return 100;
+    }
+
+    public int getNumero_motores() {
+        return numero_motores;
+    }
+
+    public void setNumero_motores(int numero_motores) {
+        this.numero_motores = numero_motores;
     }
 }

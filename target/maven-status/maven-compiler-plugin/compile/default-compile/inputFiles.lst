@@ -3,11 +3,17 @@
 /home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/Interfaces/IVehiculosGasolina.java
 /home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/classes/clsAvion.java
 /home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/Interfaces/ITipoDeTransporte.java
+/home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/test.java
+/home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/modelos/datosJDBC.java
 /home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/classes/clsAutomovil.java
 /home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/modelos/mdlVehiculo.java
 /home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/vistas/AdministradorVehiculos.java
+/home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/controlador/ctrlMecanico.java
+/home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/modelos/mdlMecanico.java
 /home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/classes/clsTallerMecanico.java
+/home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/modelos/mdlTallerMecanico.java
 /home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/classes/clsMecanico.java
 /home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/classes/abstTalleres.java
+/home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/controlador/ctrlTallerMecanico.java
 /home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/modelos/mdlAutomovil.java
 /home/andres/Drive/afcendalest/Doc Academicos/Programacion/misionTic/Ciclo 2/FundamentosProgramacion/mavenproject1/src/main/java/modelos/mdlAvion.java
