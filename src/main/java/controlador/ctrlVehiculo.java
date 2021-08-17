@@ -30,7 +30,7 @@ public class ctrlVehiculo {
     public boolean CrearVehiculo(clsVehiculo vehiculo){
         try{
             if (vehiculo.tipoDeTransporte().equals("Pasajeros en vuelo"))  {
-                this.mdlAvion.CrearVehiculo((clsAvion) vehiculo);
+                this.mdlAvion.CrearAvion((clsAvion) vehiculo);
             }else if (vehiculo.tipoDeTransporte().equals("Pasajeros en vehiculo terrestre")){
                 this.mdlAutomovil.CrearVehiculo((clsAutomovil) vehiculo);
             }else{
@@ -46,7 +46,7 @@ public class ctrlVehiculo {
         clsVehiculo vehiculo = null;
         try{
             if (tipo_vehiculo.equals("Pasajeros en vuelo"))  {
-                vehiculo =  this.mdlAvion.ConsultarVehiculo(impronta_vehiculo);
+                vehiculo =  this.mdlAvion.ConsultarAvion(impronta_vehiculo);
                 return vehiculo;
             }else if (tipo_vehiculo.equals("Pasajeros en vehiculo terrestre")){
                 vehiculo =this.mdlAutomovil.ConsultarVehiculo(impronta_vehiculo);
@@ -64,7 +64,7 @@ public class ctrlVehiculo {
         boolean bandera = false;
         try{
             if (vehiculo.tipoDeTransporte().equals("Pasajeros en vuelo"))  {
-                bandera=this.mdlAvion.EditarVehiculo((clsAvion) vehiculo);
+                bandera=this.mdlAvion.EditarAvion((clsAvion) vehiculo);
                 return bandera;
             }else if (vehiculo.tipoDeTransporte().equals("Pasajeros en vehiculo terrestre")){
                 bandera=this.mdlAutomovil.EditarVehiculo((clsAutomovil) vehiculo);
@@ -82,7 +82,7 @@ public class ctrlVehiculo {
         boolean bandera = false;
         try{
             if (tipoTransporte == "Pasajeros en vuelo")  {
-                bandera=this.mdlAvion.EliminarVehiculo(improntaVehiculo);
+                bandera=this.mdlAvion.EliminarAvion(improntaVehiculo);
                 return bandera;
             }else if (tipoTransporte == "Pasajeros en vehiculo terrestre"){
                 bandera=this.mdlAutomovil.EliminarVehiculo(improntaVehiculo);
