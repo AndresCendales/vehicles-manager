@@ -1,23 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelos;
 
-import classes.clsVehiculo;
+import classes.clsMecanico;
 
-/**
- *
- * @author andres
- */
-public class mdlVehiculo {
+public class mdlMecanico {
+    public mdlMecanico() {
+    }
 
-    public mdlVehiculo() {
-    }
-    
-        
-    public boolean CrearVehiculo(clsVehiculo vehiculo){
+
+    public boolean CrearMecanico(clsMecanico mecanico){
         try{
             //Conexión con la base de datos.
             return true;
@@ -25,8 +15,8 @@ public class mdlVehiculo {
             return false;
         }
     }
-    
-    public boolean EditarVehiculo(clsVehiculo vehiculo){
+
+    public boolean EditarMecanico(clsMecanico mecanico){
         try{
             //Conexión con la base de datos.
             return true;
@@ -34,8 +24,8 @@ public class mdlVehiculo {
             return false;
         }
     }
-    
-    public boolean EliminarVehiculo(String placa){
+
+    public boolean EliminarMecanico(int  identificacion){
         try{
             //Conexión con la base de datos.
             return true;
@@ -43,12 +33,12 @@ public class mdlVehiculo {
             return false;
         }
     }
-    
-    public clsVehiculo ConsultarVehiculo(String impronta){
-        clsVehiculo vehiculo =null;
+
+    public clsMecanico ConsultarMecanico(int identificacion){
+        clsMecanico mecanico =null;
         try{
             //Conexión con la base de datos.
-            return vehiculo;
+            return mecanico;
         }catch (Exception e){
             return null;
         }

@@ -35,7 +35,7 @@ public class mdlAutomovil {
         }
     }
     
-    public boolean EliminarVehiculo(clsAutomovil automovil){
+    public boolean EliminarVehiculo(String placa){
         try{
             //Conexión con la base de datos.
             return true;

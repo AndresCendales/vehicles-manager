@@ -6,6 +6,8 @@
 package vistas;
 
 import classes.*;
+import controlador.ctrlMecanico;
+import controlador.ctrlTallerMecanico;
 import controlador.ctrlVehiculo;
 
 import java.util.ArrayList;
@@ -20,6 +22,8 @@ import javax.swing.JOptionPane;
  */
 public class AdministradorVehiculos extends javax.swing.JFrame {
     ctrlVehiculo ctrlVehiculo;
+    ctrlMecanico ctrlMecanico;
+    ctrlTallerMecanico ctrlTallerMecanico;
     LinkedList<clsVehiculo> vehiculos = new LinkedList<>();
     LinkedList<clsMecanico> mecanicos = new LinkedList<>();
     LinkedList<clsTallerMecanico> talleresMecanicos = new LinkedList<>();
@@ -30,6 +34,8 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     public AdministradorVehiculos() {
         initComponents();
         this.ctrlVehiculo = new ctrlVehiculo();
+        this.ctrlMecanico = new ctrlMecanico();
+        this.ctrlTallerMecanico = new ctrlTallerMecanico();
     }
 
     /**
@@ -137,11 +143,6 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
         jLabel1.setText("Vehiculos Existentes");
 
-        lsListaVehiculos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(lsListaVehiculos);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -152,8 +153,8 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(211, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +163,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addContainerGap(238, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Lista de Vehiculos", jPanel1);
@@ -498,11 +499,6 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
         jLabel16.setText("Lista de Mecanicos");
 
-        lsListaMecanicos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(lsListaMecanicos);
 
         btCrearMecanico.setText("Crear Mecanico");
@@ -812,7 +808,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
             clsVehiculo vehiculo = new clsVehiculo(pasajeros,cantidadCombustible,improntaVehiculo,estadoVehiculo);
 
-            ctrlVehiculo.CrearVehiculo(vehiculo);
+            boolean ok = ctrlVehiculo.CrearVehiculo(vehiculo); //ToDo: Conectar modelos con DB
 
             vehiculos.add(vehiculo);        
             this.LlenarListaVehiculos();
@@ -825,10 +821,13 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btCrearVehiculoActionPerformed
 
     private void btConsultarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarVehiculoActionPerformed
-        String impronta_vehiculo = txtImprontaVehiculo.getText();
+        String improntaVehiculo = txtImprontaVehiculo.getText();
+
+        clsVehiculo v = ctrlVehiculo.ConsultarVehiculo(improntaVehiculo,""); //ToDo: Conectar modelos con DB
+
         boolean encontrado=false;
         for (clsVehiculo vehiculo: vehiculos){
-            if (vehiculo.getImpronta_chasis().equals(impronta_vehiculo)){
+            if (vehiculo.getImpronta_chasis().equals(improntaVehiculo)){
                 this.LimpiarFormulariosVehiculos();
                 JOptionPane.showMessageDialog(this,"El vehiculo con chasis: " 
                         + vehiculo.getImpronta_chasis() + "\n"
@@ -847,12 +846,18 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
     private void btEditarVehiculo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarVehiculo1ActionPerformed
         String improntaVehiculo = txtImprontaVehiculo.getText();
+        int cantidadCombustible = Integer.parseInt(txtCantidadCombustibleVehiculo.getText());
+        int pasajeros = Integer.parseInt(txtPasajerosVehiculo.getText());
+        String estadoVehiculo = cbEstadoVehiculo.getSelectedItem().toString();
+
+        boolean ok = ctrlVehiculo.EditarVehiculo(new clsVehiculo(pasajeros,cantidadCombustible,improntaVehiculo,estadoVehiculo)); //ToDo: Conectar modelos con DB
+
         boolean encontrado=false;
             for (clsVehiculo vehiculo: vehiculos){
                 if (vehiculo.getImpronta_chasis().equals(improntaVehiculo)){
-                vehiculo.setCombustible(Integer.parseInt(txtCantidadCombustibleVehiculo.getText()));
-                vehiculo.setPasajeros(Integer.parseInt(txtPasajerosVehiculo.getText()));
-                vehiculo.setEstado_vehiculo(cbEstadoVehiculo.getSelectedItem().toString());
+                    vehiculo.setCombustible(cantidadCombustible);
+                    vehiculo.setPasajeros(pasajeros);
+                    vehiculo.setEstado_vehiculo(estadoVehiculo);
                     this.LimpiarFormulariosVehiculos();
                     this.LlenarListaVehiculos();
                     JOptionPane.showMessageDialog(this, "El vehiculo con chasis: " 
@@ -869,6 +874,9 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
     private void btEliminarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarVehiculoActionPerformed
         String improntaVehiculo = txtImprontaVehiculo.getText();
+
+        boolean ok = ctrlVehiculo.EliminarVehiculo(improntaVehiculo,""); // ToDo: Conectar modelos con db
+
         boolean encontrado=false;
         for (clsVehiculo vehiculo: vehiculos){
             if (vehiculo.getImpronta_chasis().equals(improntaVehiculo)){
@@ -897,7 +905,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
             
             clsAvion avion = new clsAvion(tipoCombustibleAvion, pasajerosAvion, cantidadCombustibleAvion, improntaChasisAvion, estadoAvion);
             
-            ctrlVehiculo.CrearVehiculo(avion);
+            boolean ok = ctrlVehiculo.CrearVehiculo(avion); //ToDo: Conectar modelo con db
             
             vehiculos.add(avion);
             this.LimpiarFormulariosVehiculos();
@@ -911,6 +919,9 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
     private void btConsultarAvionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarAvionActionPerformed
         String improntaAvion = txtImprontaAvion.getText();
+
+        clsVehiculo v = ctrlVehiculo.ConsultarVehiculo(improntaAvion,"Pasajeros en vuelo"); //ToDo: Conectar modelos con DB
+
         boolean encontrado=false;
         for (clsVehiculo vehiculo: vehiculos){
             if (vehiculo.getImpronta_chasis().equals(improntaAvion)){
@@ -938,6 +949,9 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
     private void btEliminarAvionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarAvionActionPerformed
         String improntaAvion = txtImprontaAvion.getText();
+
+        boolean ok = ctrlVehiculo.EliminarVehiculo(improntaAvion,"Pasajeros en vuelo"); // ToDo: Conectar modelos con db
+
         boolean encontrado=false;
         for (clsVehiculo avion: vehiculos ){
             if (avion.getImpronta_chasis().equals(improntaAvion)){
@@ -963,8 +977,10 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         int pasajerosAvion =Integer.parseInt(txtPasajerosAvion.getText());
         String estadoAvion = cbEstadoAvion.getSelectedItem().toString();
         String tipoCombustibleAvion = cbTipoCombustibleAvion.getSelectedItem().toString();
-        boolean encontrado=false;
 
+        boolean ok = ctrlVehiculo.EditarVehiculo(new clsAvion(tipoCombustibleAvion, pasajerosAvion, cantidadCombustibleAvion, improntaAvion, estadoAvion)); //ToDo: Conectar modelos con DB
+
+        boolean encontrado=false;
         for (clsVehiculo vehiculo: vehiculos){
             if (vehiculo.getImpronta_chasis().equals(improntaAvion)){
                 clsAvion avion = (clsAvion) vehiculo;
@@ -999,12 +1015,13 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
             String tipoCombustible = cbTipoCombustibleAutomovil.getSelectedItem().toString();
 
             clsAutomovil automovil = new clsAutomovil(tipoCombustible,pasajerosAutomovil,cantidadCombustibleAutomovil,improntaAutomovil,estadoAutomovil);
-            ctrlVehiculo.CrearVehiculo(automovil);
+
+            boolean ok = ctrlVehiculo.CrearVehiculo(automovil); //ToDo: Conectar modelo con db
 
             vehiculos.add(automovil);
             this.LimpiarFormulariosVehiculos();
             this.LlenarListaVehiculos();
-            JOptionPane.showMessageDialog(this,"Se creo el automovil con impronta: " + automovil.getImpronta_chasis() + "y tipo de combustible: " + automovil.getTipo_combustible());
+            JOptionPane.showMessageDialog(this,"Se creo el automovil con impronta: " + automovil.getImpronta_chasis() + "   y tipo de combustible: " + automovil.getTipo_combustible());
         } catch (Exception e){
             JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un automovil con  la información suministrada");
         }
@@ -1012,6 +1029,9 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
     private void btConsultarAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarAutomovilActionPerformed
         String improntaAutomovil = txtPlacaAutomovil.getText();
+
+        clsVehiculo v = ctrlVehiculo.ConsultarVehiculo(improntaAutomovil,"Pasajeros en vehiculo terrestre"); //ToDo: Conectar modelos con DB
+
         boolean encontrado = false;
         for (clsVehiculo vehiculo: vehiculos){
             if (vehiculo.getImpronta_chasis().equals(improntaAutomovil)){
@@ -1039,8 +1059,10 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         int pasajerosAutomovil =Integer.parseInt(txtPasajerosAutomovil.getText());
         String estadoAutomovil = cbEstadoAutomovil.getSelectedItem().toString();
         String tipoCombustibleAutomovil = cbTipoCombustibleAutomovil.getSelectedItem().toString();
-        boolean encontrado = false;
 
+        boolean ok = ctrlVehiculo.EditarVehiculo(new clsAutomovil(tipoCombustibleAutomovil,pasajerosAutomovil,cantidadCombustibleAutomovil,improntaAutomovil,estadoAutomovil)); //ToDo: Conectar modelos con DB
+
+        boolean encontrado = false;
         for(clsVehiculo vehiculo: vehiculos){
             if (vehiculo.getImpronta_chasis().equals(improntaAutomovil)){
                 clsAutomovil automovil = (clsAutomovil) vehiculo;
@@ -1057,14 +1079,17 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 encontrado = true;
                 break;
             }
-            if (encontrado==false){
-                JOptionPane.showMessageDialog(this, "Automovil no encontrado");
-            }
+        }
+        if (encontrado==false){
+            JOptionPane.showMessageDialog(this, "Automovil no encontrado");
         }
     }//GEN-LAST:event_btEditarAutomovilActionPerformed
 
     private void btEliminarAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarAutomovilActionPerformed
         String placaAutomovil = txtPlacaAutomovil.getText();
+
+        boolean ok = ctrlVehiculo.EliminarVehiculo(placaAutomovil,"Pasajeros en vehiculo terrestre"); // ToDo: Conectar modelos con db
+
         boolean encontrado = false;
         for (clsVehiculo vehiculo: this.vehiculos){
             if (vehiculo.getImpronta_chasis().equals(placaAutomovil)){
@@ -1090,6 +1115,8 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
             int identificacion = Integer.parseInt(txtIdentificacion.getText());
             clsMecanico mecanico = new clsMecanico(nombre,apellidos,certificado,identificacion);
 
+            boolean ok = ctrlMecanico.CrearMecanico(mecanico); //ToDo: Conectar modelo con db
+
             mecanicos.add(mecanico);
             this.LimpiarFormulariMecanicos();
             this.LlenarListaMecanicos();
@@ -1101,6 +1128,9 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
     private void btConsultarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarMecanicoActionPerformed
         int identificacionMecanico = Integer.parseInt(txtIdentificacion.getText());
+
+        clsMecanico m = ctrlMecanico.ConsultarMecanico(identificacionMecanico); //ToDo: Conectar modelos con db
+
         boolean encontrado = false;
         for (clsMecanico mecanico: this.mecanicos){
             if (mecanico.getIdentificacion() == identificacionMecanico){
@@ -1120,6 +1150,9 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
     private void btEliminarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarMecanicoActionPerformed
         int identificacionMecanico = Integer.parseInt(txtIdentificacion.getText());
+
+        boolean ok = ctrlMecanico.EliminarMecanico(identificacionMecanico); // ToDo: Conectar modelos con db
+
         boolean encontrado = false;
         for (clsMecanico mecanico: this.mecanicos){
             if (mecanico.getIdentificacion() == identificacionMecanico){
@@ -1142,17 +1175,22 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         String apellidoMecanico = txtApellidosMecanico.getText();
         String certificado = txtCertificadoMecanico.getText();
         int identificacion = Integer.parseInt(txtIdentificacion.getText());
+
+        boolean ok = ctrlMecanico.EditarMecanico(new clsMecanico(nombreMecanico,apellidoMecanico,certificado,identificacion)); //ToDo: Conectar modelos con DB
+
         boolean encontrado = false;
         for(clsMecanico mecanico : this.mecanicos){
-            mecanico.setNombre(nombreMecanico);
-            mecanico.setapellidos(apellidoMecanico);
-            mecanico.setCertificado(certificado);
-            this.LimpiarFormulariMecanicos();
-            this.LlenarListaMecanicos();
-            JOptionPane.showMessageDialog(this, "El Mecanico identificado: "
-                    + mecanico.getIdentificacion() + " fue actualizado");
-            encontrado = true;
-            break;
+            if (mecanico.getIdentificacion() == identificacion) {
+                mecanico.setNombre(nombreMecanico);
+                mecanico.setapellidos(apellidoMecanico);
+                mecanico.setCertificado(certificado);
+                this.LimpiarFormulariMecanicos();
+                this.LlenarListaMecanicos();
+                JOptionPane.showMessageDialog(this, "El Mecanico identificado: "
+                        + mecanico.getIdentificacion() + " fue actualizado");
+                encontrado = true;
+                break;
+            }
         }
         if (encontrado==false){
             JOptionPane.showMessageDialog(this, "Mecanico no encontrado");
@@ -1188,6 +1226,8 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
             clsTallerMecanico tallerMecanico = new clsTallerMecanico(nombreTallerMecanico,telefonoTallerMecanico,direccionTallerMecanico,mecanicos,nit);
 
+            boolean ok = ctrlTallerMecanico.CrearTallerMecancio(tallerMecanico); //ToDo: Conectar modelo con db
+
             talleresMecanicos.add(tallerMecanico);
             this.LimpiarFormulariTalleresMecanico();
             this.LlenarListaTalleresMecanico();
@@ -1199,6 +1239,9 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
     private void btConsultarTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarTallerActionPerformed
         int nit = Integer.parseInt(txtNitTallerMecanico.getText());
+
+        clsTallerMecanico tm = ctrlTallerMecanico.ConsultarTallerMecanico(nit); //ToDo: Conectar modelo con db
+
         boolean encontrado = false;
         for (clsTallerMecanico tallerMecanico: this.talleresMecanicos){
             if (tallerMecanico.getNit() == nit){
@@ -1221,19 +1264,24 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         String nombreTallerMecanico = txtNombreTallerMecanico.getText();
         String telefonoTallerMecanico = txtTelefonoTallerMecanico.getText();
         String direccionTallerMecanico = txtDireccionTallerMecanico.getText();
+        int nit = Integer.parseInt(txtNitTallerMecanico.getText());
+
+        boolean ok = ctrlTallerMecanico.EditarTallerMecanico(new clsTallerMecanico(nombreTallerMecanico,direccionTallerMecanico,direccionTallerMecanico,null,nit)); //ToDo: Conectar modelo con db
 
         boolean encontrado = false;
         for(clsTallerMecanico tallerMecanico : this.talleresMecanicos){
-            tallerMecanico.setNombre(nombreTallerMecanico);
-            tallerMecanico.setDireccion(direccionTallerMecanico);
-            tallerMecanico.setTelefono(telefonoTallerMecanico);
+            if (tallerMecanico.getNit() == nit) {
+                tallerMecanico.setNombre(nombreTallerMecanico);
+                tallerMecanico.setDireccion(direccionTallerMecanico);
+                tallerMecanico.setTelefono(telefonoTallerMecanico);
 
-            this.LimpiarFormulariTalleresMecanico();
-            this.LlenarListaTalleresMecanico();
-            JOptionPane.showMessageDialog(this, "El Taller identificado con nit: "
-                    + tallerMecanico.getNit() + " fue actualizado");
-            encontrado = true;
-            break;
+                this.LimpiarFormulariTalleresMecanico();
+                this.LlenarListaTalleresMecanico();
+                JOptionPane.showMessageDialog(this, "El Taller identificado con nit: "
+                        + tallerMecanico.getNit() + " fue actualizado");
+                encontrado = true;
+                break;
+            }
         }
         if (encontrado==false){
             JOptionPane.showMessageDialog(this, "Taller no encontrado");
@@ -1242,6 +1290,9 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
     private void btEliminarTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarTallerActionPerformed
         int nit = Integer.parseInt(txtNitTallerMecanico.getText());
+
+        boolean ok = ctrlTallerMecanico.EliminarTallerMecanico(nit); //ToDo: Conectar modelo con db
+
         boolean encontrado = false;
         for (clsTallerMecanico tallerMecanico: this.talleresMecanicos){
             if (tallerMecanico.getNit() == nit){
@@ -1297,6 +1348,12 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         txtCantidadCombustibleAvion.setText("");
         cbEstadoAvion.setSelectedIndex(0);
         cbTipoCombustibleAvion.setSelectedIndex(0);
+
+        txtPlacaAutomovil.setText("");
+        txtPasajerosAutomovil.setText("");
+        txtCantidadCombustibleAutomovil.setText("");
+        cbEstadoAutomovil.setSelectedIndex(0);
+        cbTipoCombustibleAutomovil.setSelectedIndex(0);
     }
 
     private void LlenarListaMecanicos(){

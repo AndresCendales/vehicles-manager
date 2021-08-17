@@ -22,6 +22,7 @@ public class clsTallerMecanico extends abstTalleres {
         this.nit = nit;
     }
 
+
     public String getNombre() {
         return this.nombre;
     }

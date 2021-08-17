@@ -41,32 +41,58 @@ public class ctrlVehiculo {
             return false;
         }
     }
-    
-    public boolean EditarVehiculo(clsVehiculo vehiculo){
-        try{
-            //Falta código
-            return true;
-        }catch (Exception e){
-            return false;
-        }
-    }
-    
-    public boolean EliminarVehiculo(clsVehiculo vehiculo){
-        try{
-            //Falta código
-            return true;
-        }catch (Exception e){
-            return false;
-        }
-    }
-    
+
     public clsVehiculo ConsultarVehiculo(String impronta_vehiculo,String tipo_vehiculo){
         clsVehiculo vehiculo = null;
         try{
-            //Falta código
-            return vehiculo;
+            if (tipo_vehiculo.equals("Pasajeros en vuelo"))  {
+                vehiculo =  this.mdlAvion.ConsultarVehiculo(impronta_vehiculo);
+                return vehiculo;
+            }else if (tipo_vehiculo.equals("Pasajeros en vehiculo terrestre")){
+                vehiculo =this.mdlAutomovil.ConsultarVehiculo(impronta_vehiculo);
+                return vehiculo;
+            }else{
+                vehiculo =this.mdlVehiculo.ConsultarVehiculo(impronta_vehiculo);
+                return vehiculo;
+            }
         }catch (Exception e){
             return null;
+        }
+    }
+
+    public boolean EditarVehiculo(clsVehiculo vehiculo){
+        boolean bandera = false;
+        try{
+            if (vehiculo.tipoDeTransporte().equals("Pasajeros en vuelo"))  {
+                bandera=this.mdlAvion.EditarVehiculo((clsAvion) vehiculo);
+                return bandera;
+            }else if (vehiculo.tipoDeTransporte().equals("Pasajeros en vehiculo terrestre")){
+                bandera=this.mdlAutomovil.EditarVehiculo((clsAutomovil) vehiculo);
+                return bandera;
+            }else{
+                bandera=this.mdlVehiculo.EditarVehiculo(vehiculo);
+                return bandera;
+            }
+        }catch (Exception e){
+            return false;
+        }
+    }
+    
+    public boolean EliminarVehiculo(String improntaVehiculo,String tipoTransporte){
+        boolean bandera = false;
+        try{
+            if (tipoTransporte == "Pasajeros en vuelo")  {
+                bandera=this.mdlAvion.EliminarVehiculo(improntaVehiculo);
+                return bandera;
+            }else if (tipoTransporte == "Pasajeros en vehiculo terrestre"){
+                bandera=this.mdlAutomovil.EliminarVehiculo(improntaVehiculo);
+                return bandera;
+            }else{
+                bandera=this.mdlVehiculo.EliminarVehiculo(improntaVehiculo);
+                return bandera;
+            }
+        }catch (Exception e){
+            return false;
         }
     }
 }
