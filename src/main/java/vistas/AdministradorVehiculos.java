@@ -1068,7 +1068,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "El mecanico con identificacion: "
                     + identificacionMecanico + " fue eliminado");
         } else {
-            JOptionPane.showMessageDialog(this, "mecanico no encontrado");
+            JOptionPane.showMessageDialog(this, "mecanico no eliminado. Revise que no se encuentre asociado a ningun taller. ");
         }
         this.LimpiarFormulariMecanicos();
         this.LlenarListaMecanicos();

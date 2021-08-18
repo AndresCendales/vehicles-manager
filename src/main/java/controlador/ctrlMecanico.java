@@ -53,8 +53,8 @@ public class ctrlMecanico {
 
     public boolean EliminarMecanico(int identificacion) {
         try {
-            this.mdlMecanico.EliminarMecanico(identificacion);
-            return true;
+            boolean ok = this.mdlMecanico.EliminarMecanico(identificacion);
+            return ok;
         } catch (Exception e) {
             return false;
         }
