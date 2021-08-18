@@ -9,6 +9,7 @@ import classes.clsAutomovil;
 import classes.clsVehiculo;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * @author andres
@@ -73,7 +74,7 @@ public class mdlVehiculo {
     public clsVehiculo ConsultarVehiculo(String impronta) {
         clsVehiculo vehiculo = null;
         try (Connection connection = DriverManager.getConnection(datosJDBC.getUrl(), datosJDBC.getUser(), datosJDBC.getPassword())) {
-            String query = "SELECT * FROM tb_vehiculo WHERE impronta_chasis=?";
+            String query = "SELECT * FROConsultarVehiculosM tb_vehiculo WHERE impronta_chasis=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, impronta);
             ResultSet resultSet = statement.executeQuery();
@@ -89,6 +90,30 @@ public class mdlVehiculo {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
+        }
+    }
+
+    public void ConsultarVehiculos(ArrayList<clsVehiculo> vehiculos) {
+        try (Connection connection = DriverManager.getConnection(datosJDBC.getUrl(), datosJDBC.getUser(), datosJDBC.getPassword())) {
+            // Obtener autos sin avion ni automovil
+            String query = "SELECT * FROM tb_vehiculo t " +
+                    "LEFT JOIN tb_avion av on t.id = av.id_vehiculo " +
+                    "left join tb_automovil au on t.id = au.id_vehiculo " +
+                    "where av.id is null and au.id is null;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()){
+                int id = resultSet.getInt(1);
+                String improntaChasis = resultSet.getString(2);
+                int pasajeros = resultSet.getInt(3);
+                int combustible = resultSet.getInt(4);
+                String estadoVehiculo = resultSet.getString(5);
+                clsVehiculo vehiculo = new clsVehiculo(pasajeros,combustible,improntaChasis,estadoVehiculo);
+                vehiculos.add(vehiculo);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

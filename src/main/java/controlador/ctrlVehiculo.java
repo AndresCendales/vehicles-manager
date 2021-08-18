@@ -12,6 +12,8 @@ import modelos.mdlAutomovil;
 import modelos.mdlAvion;
 import modelos.mdlVehiculo;
 
+import java.util.ArrayList;
+
 /**
  * @author andres
  */
@@ -54,6 +56,18 @@ public class ctrlVehiculo {
                 vehiculo = this.mdlVehiculo.ConsultarVehiculo(impronta_vehiculo);
                 return vehiculo;
             }
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public ArrayList<clsVehiculo> ConsultarVehiculos(){
+        ArrayList<clsVehiculo> vehiculos = new ArrayList<>();
+        try {
+            this.mdlVehiculo.ConsultarVehiculos(vehiculos);
+            this.mdlAvion.ConsultarAviones(vehiculos);
+            this.mdlAutomovil.ConsultarAutomoviles(vehiculos);
+            return vehiculos;
         } catch (Exception e) {
             return null;
         }

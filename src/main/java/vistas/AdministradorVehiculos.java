@@ -36,6 +36,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         this.ctrlVehiculo = new ctrlVehiculo();
         this.ctrlMecanico = new ctrlMecanico();
         this.ctrlTallerMecanico = new ctrlTallerMecanico();
+        this.LlenarListaVehiculos();
     }
 
     /**
@@ -1228,27 +1229,28 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTelefonoTallerMecanicoActionPerformed
 
     private void LlenarListaVehiculos(){
+        ArrayList<clsVehiculo> vehiculos = ctrlVehiculo.ConsultarVehiculos();
 
-        /*DefaultListModel model = new DefaultListModel();
+        DefaultListModel model = new DefaultListModel();
         int index=0;
         for (clsVehiculo vehiculo : vehiculos){
             if (vehiculo.tipoDeTransporte().equals("Pasajeros en vuelo")){
                 clsAvion avion = (clsAvion) vehiculo;
-                String datos = "impronta: "+vehiculo.getImpronta_chasis()+ " - pasajeros: " + vehiculo.getPasajeros() + " - combustible: " + vehiculo.getCombustible() + " - Estado: " +vehiculo.getEstado_vehiculo() + " - "+ avion.getTipo_combustible();
+                String datos = index +1 + ". Tipo Avion | impronta: "+vehiculo.getImpronta_chasis()+ " - pasajeros: " + vehiculo.getPasajeros() + " - combustible: " + vehiculo.getCombustible() + " - Estado: " +vehiculo.getEstado_vehiculo() + " - "+ avion.getTipo_combustible();
                 model.add(index, datos);
                 index ++;  
             }else if(vehiculo.tipoDeTransporte().equals("Pasajeros en vehiculo terrestre")){
                 clsAutomovil automovil = (clsAutomovil) vehiculo;
-                String datos = "placa: "+vehiculo.getImpronta_chasis()+ " - pasajeros: " + vehiculo.getPasajeros() + " - combustible: " + vehiculo.getCombustible() + " - Estado: " +vehiculo.getEstado_vehiculo() + " - "+ automovil.getTipo_combustible();
+                String datos = index +1 + ". Tipo Automovil | placa: "+vehiculo.getImpronta_chasis()+ " - pasajeros: " + vehiculo.getPasajeros() + " - combustible: " + vehiculo.getCombustible() + " - Estado: " +vehiculo.getEstado_vehiculo() + " - "+ automovil.getTipo_combustible();
                 model.add(index, datos);
                 index ++;  
             }else{            
-                String datos = "impronta: "+vehiculo.getImpronta_chasis()+ " - pasajeros: " + vehiculo.getPasajeros() + " - combustible: " + vehiculo.getCombustible() + " - Estado: " +vehiculo.getEstado_vehiculo();
+                String datos = index +1 + ". Tipo Vehiculo | impronta: "+vehiculo.getImpronta_chasis()+ " - pasajeros: " + vehiculo.getPasajeros() + " - combustible: " + vehiculo.getCombustible() + " - Estado: " +vehiculo.getEstado_vehiculo();
                 model.add(index, datos);
                 index ++;
             }
         }
-        lsListaVehiculos.setModel(model);*/
+        lsListaVehiculos.setModel(model);
     }
     
     private void LimpiarFormulariosVehiculos(){

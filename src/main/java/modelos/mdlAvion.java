@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -137,5 +138,31 @@ public class mdlAvion {
             return null;
         }
     }
-    
+
+    public void ConsultarAviones(ArrayList<clsVehiculo> vehiculos) {
+        //ArrayList<clsVehiculo> vehiculos = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(datosJDBC.getUrl(), datosJDBC.getUser(), datosJDBC.getPassword())) {
+            String query = "SELECT * FROM tb_vehiculo INNER JOIN tb_avion ON tb_vehiculo.id=tb_avion.id_vehiculo";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String impronta_chasis = resultSet.getString(2);
+                int pasajeros = resultSet.getInt(3);
+                int combustible = resultSet.getInt(4);
+                String estado_vehiculo = resultSet.getString(5);
+                int id_avion = resultSet.getInt(6);
+                String tipo_combustible = resultSet.getString(7);
+                int numero_motores = resultSet.getInt(8);
+                int id_vehiculo = resultSet.getInt(9);
+                clsAvion avion = new clsAvion(tipo_combustible, pasajeros, combustible, impronta_chasis, estado_vehiculo, numero_motores);
+                vehiculos.add(avion);
+            }
+            //  return vehiculos;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            //return null;
+        }
+    }
 }
