@@ -947,11 +947,11 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btConsultarTaller" min="-2" pref="180" max="-2" attributes="0"/>
-                          <Component id="btCrearTaller" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btCrearTaller" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="btConsultarTaller" alignment="1" min="-2" pref="180" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btEliminarTaller" min="-2" pref="180" max="-2" attributes="0"/>
                           <Component id="btEditarTaller" min="-2" pref="180" max="-2" attributes="0"/>
@@ -996,13 +996,13 @@
                       <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btConsultarTaller" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="btEditarTaller" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="btCrearTaller" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btEliminarTaller" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                          <Component id="btCrearTaller" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="btConsultarTaller" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="49" max="32767" attributes="0"/>
                   </Group>
@@ -1051,7 +1051,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel27">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Mecanicos"/>
+                <Property name="text" type="java.lang.String" value="Mecanico"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtMecanicosTallerMecanico">
@@ -1110,7 +1110,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Noto Sans" size="10" style="2"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Ingrese las identificaciones de los mecanicos separados por coma."/>
+                <Property name="text" type="java.lang.String" value="Ingrese la identificacion del mecanico"/>
               </Properties>
             </Component>
           </SubComponents>

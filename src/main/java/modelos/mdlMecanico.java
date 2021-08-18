@@ -34,7 +34,7 @@ public class mdlMecanico {
 
     public boolean EditarMecanico(clsMecanico mecanico) {
         try (Connection connection = DriverManager.getConnection(datosJDBC.getUrl(), datosJDBC.getUser(), datosJDBC.getPassword())) {
-            String query = "UPDATE tb_mecanico SET nomre=?,apellido=?,certificado=? WHERE identificacion=?";
+            String query = "UPDATE tb_mecanico SET nombre=?,apellido=?,certificado=? WHERE identificacion=?";
             PreparedStatement statementVehiculo = connection.prepareStatement(query);
             statementVehiculo.setString(1, mecanico.getNombre());
             statementVehiculo.setString(2, mecanico.getapellidos());

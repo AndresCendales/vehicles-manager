@@ -38,6 +38,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         this.ctrlTallerMecanico = new ctrlTallerMecanico();
         this.LlenarListaVehiculos();
         this.LlenarListaMecanicos();
+        this.LlenarListaTalleresMecanico();
     }
 
     /**
@@ -642,7 +643,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
         jLabel26.setText("Telefono");
 
-        jLabel27.setText("Mecanicos");
+        jLabel27.setText("Mecanico");
 
         txtTelefonoTallerMecanico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -682,7 +683,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         jLabel28.setText("Nit");
 
         jLabel29.setFont(new java.awt.Font("Noto Sans", 2, 10)); // NOI18N
-        jLabel29.setText("Ingrese las identificaciones de los mecanicos separados por coma.");
+        jLabel29.setText("Ingrese la identificacion del mecanico");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -723,10 +724,10 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                         .addGap(56, 56, 56))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btConsultarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btCrearTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btCrearTaller, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btConsultarTaller, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btEliminarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btEditarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -762,12 +763,12 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addComponent(jLabel29)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btConsultarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btEditarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btEditarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCrearTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btEliminarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btCrearTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btConsultarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
@@ -1099,60 +1100,43 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
             String direccionTallerMecanico = txtDireccionTallerMecanico.getText();
             int nit = Integer.parseInt(txtNitTallerMecanico.getText());
 
-            String idMecanicosRaw = txtMecanicosTallerMecanico.getText();
-
-            // Parsear cada identificacion separada por coma a un int
-            idMecanicosRaw += ",";
-            String[] idMecanicosStr = idMecanicosRaw.split(",");
-            int[] idMecanicos = new int[idMecanicosStr.length];
-            for (int i = 0; i < idMecanicos.length; i++){
-                idMecanicos[i] = Integer.parseInt(idMecanicosStr[i]);
-            }
-
-            // Se consulta si los mecanicos que se estan relacionando en el form estan en el array de mecanicos previo
+            int idMecanico = Integer.parseInt(txtMecanicosTallerMecanico.getText());
             ArrayList<clsMecanico> mecanicos = new ArrayList();
-            for (clsMecanico m: this.mecanicos){
-                int id = m.getIdentificacion();
-                boolean contains = IntStream.of(idMecanicos).anyMatch(x -> x==id);
-                if (contains==true){
-                    mecanicos.add(m);
-                }
-            }
+            clsMecanico mecanico = this.ctrlMecanico.ConsultarMecanico(idMecanico);
+            mecanicos.add(mecanico);
 
             clsTallerMecanico tallerMecanico = new clsTallerMecanico(nombreTallerMecanico,telefonoTallerMecanico,direccionTallerMecanico,mecanicos,nit);
-
-            boolean ok = ctrlTallerMecanico.CrearTallerMecancio(tallerMecanico); //ToDo: Conectar modelo con db
-
-            talleresMecanicos.add(tallerMecanico);
-            this.LimpiarFormulariTalleresMecanico();
-            this.LlenarListaTalleresMecanico();
-            JOptionPane.showMessageDialog(this,"Se creo el taller con nombre: " + tallerMecanico.getNombre() + " Direccion: : " + tallerMecanico.getDireccion() + " nit: " + tallerMecanico.getNit());
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un taller con  la información suministrada. Recuerde que debe tener creados previamente mecanicos para asociar al taller, y que debe incluir unicamente la identificacion de los mecanicos separados por coma sin espacios.");
+            boolean ok = ctrlTallerMecanico.CrearTallerMecancio(tallerMecanico);
+            if (ok){
+                talleresMecanicos.add(tallerMecanico);
+                this.LimpiarFormulariTalleresMecanico();
+                this.LlenarListaTalleresMecanico();
+                JOptionPane.showMessageDialog(this,"Se creo el taller con nombre: " + tallerMecanico.getNombre() + " Direccion: : " + tallerMecanico.getDireccion() + " nit: " + tallerMecanico.getNit());
+            } else {
+                JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un taller con  la información suministrada");
+            }
+      }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un taller con  la información suministrada. Recuerde que debe incluir unicamente el valor de la identificacion del mecanico asociado.");
         }
     }//GEN-LAST:event_btCrearTallerActionPerformed
 
     private void btConsultarTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarTallerActionPerformed
         int nit = Integer.parseInt(txtNitTallerMecanico.getText());
 
-        clsTallerMecanico tm = ctrlTallerMecanico.ConsultarTallerMecanico(nit); //ToDo: Conectar modelo con db
+        clsTallerMecanico tallerMecanico = ctrlTallerMecanico.ConsultarTallerMecanico(nit);
+        if (tallerMecanico == null) {
+            JOptionPane.showMessageDialog(this, "taller no encontrado");
+            this.LimpiarFormulariTalleresMecanico();
+            this.LlenarListaTalleresMecanico();
+        } else {
+            txtNombreTallerMecanico.setText(tallerMecanico.getNombre() + "");
+            txtDireccionTallerMecanico.setText(tallerMecanico.getDireccion() + "");
+            txtTelefonoTallerMecanico.setText(tallerMecanico.getTelefono() + "");
+            txtNitTallerMecanico.setText(tallerMecanico.getNit() + "");
+            txtMecanicosTallerMecanico.setText(tallerMecanico.getMecanicos().get(0).getIdentificacion() + "");
+            JOptionPane.showMessageDialog(this, "taller encontrado satisfactoriamente");
+        }
 
-        boolean encontrado = false;
-        for (clsTallerMecanico tallerMecanico: this.talleresMecanicos){
-            if (tallerMecanico.getNit() == nit){
-                JOptionPane.showMessageDialog(this,"El taller con nit numero: "
-                        + tallerMecanico.getNit() + "\n"
-                        +"Nombre: " + tallerMecanico.getNombre()+"\n"+
-                        "Direccion: " + tallerMecanico.getDireccion()+"\n"+
-                        "Telefono: " +tallerMecanico.getTelefono()+"\n"+
-                        "Identificaciones de los Mecanicos relacionados al taller: " + tallerMecanico.getIdsMecanicos());
-                encontrado = true;
-                break;
-            }
-        }
-        if(encontrado==false){
-            JOptionPane.showMessageDialog(this, "Taller no encontrado");
-        }
     }//GEN-LAST:event_btConsultarTallerActionPerformed
 
     private void btEditarTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarTallerActionPerformed
@@ -1160,49 +1144,36 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         String telefonoTallerMecanico = txtTelefonoTallerMecanico.getText();
         String direccionTallerMecanico = txtDireccionTallerMecanico.getText();
         int nit = Integer.parseInt(txtNitTallerMecanico.getText());
+        int idMecanico = Integer.parseInt(txtMecanicosTallerMecanico.getText());
 
-        boolean ok = ctrlTallerMecanico.EditarTallerMecanico(new clsTallerMecanico(nombreTallerMecanico,direccionTallerMecanico,direccionTallerMecanico,null,nit)); //ToDo: Conectar modelo con db
+        ArrayList<clsMecanico> mecanicos = new ArrayList<>();
+        clsMecanico mecanico = ctrlMecanico.ConsultarMecanico(idMecanico);
+        mecanicos.add(mecanico);
 
-        boolean encontrado = false;
-        for(clsTallerMecanico tallerMecanico : this.talleresMecanicos){
-            if (tallerMecanico.getNit() == nit) {
-                tallerMecanico.setNombre(nombreTallerMecanico);
-                tallerMecanico.setDireccion(direccionTallerMecanico);
-                tallerMecanico.setTelefono(telefonoTallerMecanico);
-
-                this.LimpiarFormulariTalleresMecanico();
-                this.LlenarListaTalleresMecanico();
-                JOptionPane.showMessageDialog(this, "El Taller identificado con nit: "
-                        + tallerMecanico.getNit() + " fue actualizado");
-                encontrado = true;
-                break;
-            }
-        }
-        if (encontrado==false){
-            JOptionPane.showMessageDialog(this, "Taller no encontrado");
+        boolean ok = ctrlTallerMecanico.EditarTallerMecanico(new clsTallerMecanico(nombreTallerMecanico,telefonoTallerMecanico,direccionTallerMecanico,mecanicos,nit));
+        if (ok){
+            JOptionPane.showMessageDialog(this, "El taller con nit: "
+                    + nit + " fue actualizado");
+            this.LimpiarFormulariTalleresMecanico();
+            this.LlenarListaTalleresMecanico();
+        }else {
+            JOptionPane.showMessageDialog(this, "El taller con nit: "
+                    + nit + " NO fue actualizado");
         }
     }//GEN-LAST:event_btEditarTallerActionPerformed
 
     private void btEliminarTallerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarTallerActionPerformed
         int nit = Integer.parseInt(txtNitTallerMecanico.getText());
 
-        boolean ok = ctrlTallerMecanico.EliminarTallerMecanico(nit); //ToDo: Conectar modelo con db
-
-        boolean encontrado = false;
-        for (clsTallerMecanico tallerMecanico: this.talleresMecanicos){
-            if (tallerMecanico.getNit() == nit){
-                this.talleresMecanicos.remove(tallerMecanico);
-                this.LimpiarFormulariTalleresMecanico();
-                this.LlenarListaTalleresMecanico();
-                JOptionPane.showMessageDialog(this, "El Taller identificado con nit : "
-                        + tallerMecanico.getNit() + " fue eliminado");
-                encontrado = true;
-                break;
-            }
+        boolean ok = ctrlTallerMecanico.EliminarTallerMecanico(nit);
+        if (ok) {
+            JOptionPane.showMessageDialog(this, "El taller con identificacion: "
+                    + nit + " fue eliminado");
+        } else {
+            JOptionPane.showMessageDialog(this, "taller no eliminado");
         }
-        if(encontrado==false){
-            JOptionPane.showMessageDialog(this, "Taller no encontrado");
-        }
+        this.LimpiarFormulariTalleresMecanico();
+        this.LlenarListaTalleresMecanico();
     }//GEN-LAST:event_btEliminarTallerActionPerformed
 
     private void txtTelefonoTallerMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoTallerMecanicoActionPerformed
@@ -1275,10 +1246,11 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     }
 
     private void LlenarListaTalleresMecanico(){
+        ArrayList<clsTallerMecanico> talleresMecanico = ctrlTallerMecanico.ConsultarTallerMecanicos();
         DefaultListModel model = new DefaultListModel();
         int index = 0;
-        for (clsTallerMecanico tallerMecanico: talleresMecanicos){
-            String datos = "Nombre: " + tallerMecanico.getNombre() + " - Direccion: " + tallerMecanico.getDireccion() + " - Nit: " + tallerMecanico.getNit() + " - Ids Mecanicos Afiliados: " + tallerMecanico.getIdsMecanicos();
+        for (clsTallerMecanico tallerMecanico: talleresMecanico){
+            String datos = index + 1 + ". Nombre: " + tallerMecanico.getNombre() + " - Direccion: " + tallerMecanico.getDireccion() + " - Nit: " + tallerMecanico.getNit() + " - Ids Mecanicos Afiliados: " + tallerMecanico.getIdsMecanicos();
             model.add(index, datos);
             index++;
         }

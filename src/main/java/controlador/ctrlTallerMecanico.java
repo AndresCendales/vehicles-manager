@@ -3,6 +3,8 @@ package controlador;
 import classes.clsTallerMecanico;
 import modelos.mdlTallerMecanico;
 
+import java.util.ArrayList;
+
 public class ctrlTallerMecanico {
     private modelos.mdlTallerMecanico mdlTallerMecanico;
 
@@ -10,39 +12,49 @@ public class ctrlTallerMecanico {
         this.mdlTallerMecanico = new mdlTallerMecanico();
     }
 
-    public boolean CrearTallerMecancio(clsTallerMecanico tallerMecanico){
-        try{
-            this.mdlTallerMecanico.CrearTallerMecanico(tallerMecanico);
-            return true;
-        }catch (Exception e){
+    public boolean CrearTallerMecancio(clsTallerMecanico tallerMecanico) {
+        try {
+            boolean ok = this.mdlTallerMecanico.CrearTallerMecanico(tallerMecanico);
+            return ok;
+        } catch (Exception e) {
             return false;
         }
     }
 
-    public clsTallerMecanico ConsultarTallerMecanico(int nit){
+    public clsTallerMecanico ConsultarTallerMecanico(int nit) {
         clsTallerMecanico tallerMecanico = null;
-        try{
-            this.mdlTallerMecanico.ConsultarTallerMecanico(nit);
+        try {
+            tallerMecanico = this.mdlTallerMecanico.ConsultarTallerMecanico(nit);
             return tallerMecanico;
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
-    public boolean EditarTallerMecanico(clsTallerMecanico tallerMecanico){
-        try{
-            this.mdlTallerMecanico.EditarTallerMecanico(tallerMecanico);
-            return true;
-        }catch (Exception e){
+    public ArrayList<clsTallerMecanico> ConsultarTallerMecanicos() {
+        ArrayList<clsTallerMecanico> talleresMecanico = null;
+        try {
+            talleresMecanico = this.mdlTallerMecanico.ConsultarTalleresMecanico();
+            return talleresMecanico;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public boolean EditarTallerMecanico(clsTallerMecanico tallerMecanico) {
+        try {
+            boolean ok = this.mdlTallerMecanico.EditarTallerMecanico(tallerMecanico);
+            return ok;
+        } catch (Exception e) {
             return false;
         }
     }
 
-    public boolean EliminarTallerMecanico(int nit){
-        try{
-            this.mdlTallerMecanico.EliminarTallerMecanico(nit);
-            return true;
-        }catch (Exception e){
+    public boolean EliminarTallerMecanico(int nit) {
+        try {
+            boolean ok = this.mdlTallerMecanico.EliminarTallerMecanico(nit);
+            return ok ;
+        } catch (Exception e) {
             return false;
         }
     }
