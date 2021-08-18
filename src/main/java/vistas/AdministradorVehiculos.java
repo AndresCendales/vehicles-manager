@@ -162,8 +162,8 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Lista de Vehiculos", jPanel1);
@@ -436,18 +436,14 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel8))
-                        .addGap(23, 23, 23))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel7))
+                .addGap(23, 23, 23)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCantidadCombustibleAvion)
                     .addComponent(txtImprontaAvion)
@@ -811,13 +807,16 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
             clsVehiculo vehiculo = new clsVehiculo(pasajeros,cantidadCombustible,improntaVehiculo,estadoVehiculo);
 
-            boolean ok = ctrlVehiculo.CrearVehiculo(vehiculo); //ToDo: Conectar modelos con DB
+            boolean ok = ctrlVehiculo.CrearVehiculo(vehiculo);
 
-            vehiculos.add(vehiculo);        
-            this.LlenarListaVehiculos();
-            this.LimpiarFormulariosVehiculos();
-
-            JOptionPane.showMessageDialog(this, "Se instancio el vehiculo con la impronta: " + vehiculo.getImpronta_chasis()); 
+            if (ok){
+                vehiculos.add(vehiculo);
+                this.LlenarListaVehiculos();
+                this.LimpiarFormulariosVehiculos();
+                JOptionPane.showMessageDialog(this, "Se creó el vehiculo con impronta: " + vehiculo.getImpronta_chasis());
+            } else {
+                JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un vehiculo con  la información suministrada");
+            }
         } catch(Exception e){
             JOptionPane.showMessageDialog(this, "Corrija los datos ingresados.");
         }
@@ -826,24 +825,15 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private void btConsultarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarVehiculoActionPerformed
         String improntaVehiculo = txtImprontaVehiculo.getText();
 
-        clsVehiculo v = ctrlVehiculo.ConsultarVehiculo(improntaVehiculo,""); //ToDo: Conectar modelos con DB
-
-        boolean encontrado=false;
-        for (clsVehiculo vehiculo: vehiculos){
-            if (vehiculo.getImpronta_chasis().equals(improntaVehiculo)){
-                this.LimpiarFormulariosVehiculos();
-                JOptionPane.showMessageDialog(this,"El vehiculo con chasis: " 
-                        + vehiculo.getImpronta_chasis() + "\n"
-                +"Cantidad combustible: " + vehiculo.getCombustible()+"\n"+
-                        "Pasajeros: " + vehiculo.getPasajeros()+"\n"+
-                        "Estado Vehículo: " +vehiculo.getEstado_vehiculo());
-                encontrado = true;
-                break;
-            }
-        }
-        
-        if (encontrado==false){
-            JOptionPane.showMessageDialog(this, "Vehículo no encontrado");
+        clsVehiculo vehiculo = ctrlVehiculo.ConsultarVehiculo(improntaVehiculo, "");
+        if (vehiculo == null) {
+            JOptionPane.showMessageDialog(this, "vehiculo no encontrado");
+            this.LimpiarFormulariosVehiculos();
+        } else {
+            txtPasajerosVehiculo.setText(vehiculo.getPasajeros() + "");
+            txtCantidadCombustibleVehiculo.setText(vehiculo.getCombustible() + "");
+            cbEstadoVehiculo.setSelectedItem(vehiculo.getEstado_vehiculo());
+            JOptionPane.showMessageDialog(this, "vehiculo encontrado satisfactoriamente");
         }
     }//GEN-LAST:event_btConsultarVehiculoActionPerformed
 
@@ -853,49 +843,30 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         int pasajeros = Integer.parseInt(txtPasajerosVehiculo.getText());
         String estadoVehiculo = cbEstadoVehiculo.getSelectedItem().toString();
 
-        boolean ok = ctrlVehiculo.EditarVehiculo(new clsVehiculo(pasajeros,cantidadCombustible,improntaVehiculo,estadoVehiculo)); //ToDo: Conectar modelos con DB
-
-        boolean encontrado=false;
-            for (clsVehiculo vehiculo: vehiculos){
-                if (vehiculo.getImpronta_chasis().equals(improntaVehiculo)){
-                    vehiculo.setCombustible(cantidadCombustible);
-                    vehiculo.setPasajeros(pasajeros);
-                    vehiculo.setEstado_vehiculo(estadoVehiculo);
-                    this.LimpiarFormulariosVehiculos();
-                    this.LlenarListaVehiculos();
-                    JOptionPane.showMessageDialog(this, "El vehiculo con chasis: " 
-                            + vehiculo.getImpronta_chasis() + " fue actualizado");
-                    encontrado = true;
-                    break;
-                }
-            }
-        
-            if (encontrado==false){
-                JOptionPane.showMessageDialog(this, "Vehículo no encontrado");
-        }        
+        boolean ok = ctrlVehiculo.EditarVehiculo(new clsVehiculo(pasajeros,cantidadCombustible,improntaVehiculo,estadoVehiculo));
+        if (ok){
+            this.LimpiarFormulariosVehiculos();
+            this.LlenarListaVehiculos();
+            JOptionPane.showMessageDialog(this, "El vehiculo con impronta: "
+                    + improntaVehiculo + " fue actualizado");
+        }else {
+            JOptionPane.showMessageDialog(this, "El avion con chasis: "
+                    + improntaVehiculo + " NO fue actualizado");
+        }
     }//GEN-LAST:event_btEditarVehiculo1ActionPerformed
 
     private void btEliminarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarVehiculoActionPerformed
         String improntaVehiculo = txtImprontaVehiculo.getText();
 
-        boolean ok = ctrlVehiculo.EliminarVehiculo(improntaVehiculo,""); // ToDo: Conectar modelos con db
-
-        boolean encontrado=false;
-        for (clsVehiculo vehiculo: vehiculos){
-            if (vehiculo.getImpronta_chasis().equals(improntaVehiculo)){
-                this.vehiculos.remove(vehiculo);
-                this.LimpiarFormulariosVehiculos();
-                this.LlenarListaVehiculos();
-                JOptionPane.showMessageDialog(this, "El vehiculo con chasis: " 
-                        + vehiculo.getImpronta_chasis() + " fue eliminado");
-                encontrado = true;
-                break;
-            }
+        boolean ok = ctrlVehiculo.EliminarVehiculo(improntaVehiculo, "");
+        if (ok) {
+            JOptionPane.showMessageDialog(this, "El vehiculo con impronta: "
+                    + improntaVehiculo + " fue eliminado");
+        } else {
+            JOptionPane.showMessageDialog(this, "vehiculo no encontrado");
         }
-        
-        if (encontrado==false){
-            JOptionPane.showMessageDialog(this, "Vehículo no encontrado");
-        }
+        this.LimpiarFormulariosVehiculos();
+        this.LlenarListaVehiculos();
     }//GEN-LAST:event_btEliminarVehiculoActionPerformed
 
     private void btCrearAvionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearAvionActionPerformed
@@ -929,6 +900,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         clsAvion avion = (clsAvion) ctrlVehiculo.ConsultarVehiculo(improntaAvion,"Pasajeros en vuelo");
         if (avion == null){
             JOptionPane.showMessageDialog(this, "avion no encontrado");
+            this.LimpiarFormulariosVehiculos();
         } else {
             txtPasajerosAvion.setText(avion.getPasajeros()+"");
             txtCantidadCombustibleAvion.setText(avion.getCombustible()+"");
@@ -1006,6 +978,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
 
         if (automovil==null){
             JOptionPane.showMessageDialog(this, "automovil no encontrado");
+            this.LimpiarFormulariosVehiculos();
         } else{
             txtPlacaAutomovil.setText(automovil.getImpronta_chasis()+"");
             txtPasajerosAutomovil.setText(automovil.getPasajeros()+"");
@@ -1255,7 +1228,8 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTelefonoTallerMecanicoActionPerformed
 
     private void LlenarListaVehiculos(){
-        DefaultListModel model = new DefaultListModel();
+
+        /*DefaultListModel model = new DefaultListModel();
         int index=0;
         for (clsVehiculo vehiculo : vehiculos){
             if (vehiculo.tipoDeTransporte().equals("Pasajeros en vuelo")){
@@ -1274,7 +1248,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 index ++;
             }
         }
-        lsListaVehiculos.setModel(model);
+        lsListaVehiculos.setModel(model);*/
     }
     
     private void LimpiarFormulariosVehiculos(){
