@@ -9,6 +9,7 @@ import classes.*;
 import controlador.ctrlMecanico;
 import controlador.ctrlTallerMecanico;
 import controlador.ctrlVehiculo;
+import controlador.ctrlVisitaTaller;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -24,6 +25,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     ctrlVehiculo ctrlVehiculo;
     ctrlMecanico ctrlMecanico;
     ctrlTallerMecanico ctrlTallerMecanico;
+    ctrlVisitaTaller ctrlVisitaTaller;
     LinkedList<clsVehiculo> vehiculos = new LinkedList<>();
     LinkedList<clsMecanico> mecanicos = new LinkedList<>();
     LinkedList<clsTallerMecanico> talleresMecanicos = new LinkedList<>();
@@ -36,6 +38,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         this.ctrlVehiculo = new ctrlVehiculo();
         this.ctrlMecanico = new ctrlMecanico();
         this.ctrlTallerMecanico = new ctrlTallerMecanico();
+        this.ctrlVisitaTaller = new ctrlVisitaTaller();
         this.LlenarListaVehiculos();
         this.LlenarListaMecanicos();
         this.LlenarListaTalleresMecanico();
@@ -57,6 +60,12 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lsListaVehiculos = new javax.swing.JList<>();
+        jLabel23 = new javax.swing.JLabel();
+        txtTallerVisita = new javax.swing.JTextField();
+        txtImprontaVisita = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        btCrearVisita = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -144,29 +153,73 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         label1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         label1.setText("Administrador de Vehiculos");
 
-        jLabel1.setText("Vehiculos Existentes");
+        jLabel1.setText("Visitas a Talleres");
 
         jScrollPane1.setViewportView(lsListaVehiculos);
+
+        jLabel23.setText("Vehiculos Existentes");
+
+        jLabel30.setText("Nit Taller");
+
+        jLabel31.setText("Impronta");
+
+        btCrearVisita.setText("Nueva Visita");
+        btCrearVisita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCrearVisitaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtImprontaVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel30)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTallerVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btCrearVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(32, 32, 32)
+                    .addComponent(jLabel23)
+                    .addContainerGap(435, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(55, 55, 55)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtImprontaVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel30)
+                        .addComponent(txtTallerVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btCrearVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel31))
+                .addGap(67, 67, 67))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(26, 26, 26)
+                    .addComponent(jLabel23)
+                    .addContainerGap(421, Short.MAX_VALUE)))
         );
 
         jTabbedPane2.addTab("Lista de Vehiculos", jPanel1);
@@ -261,7 +314,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(cbEstadoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCrearVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btEditarVehiculo1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -382,7 +435,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btEliminarAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btConsultarAutomovil, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Automoviles", jPanel4);
@@ -505,7 +558,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btEliminarAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btConsultarAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Aviones", jPanel3);
@@ -616,7 +669,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCertificadoMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21))
@@ -769,7 +822,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btEliminarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btConsultarTaller, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Talleres Mecanicos", jPanel6);
@@ -1180,6 +1233,26 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoTallerMecanicoActionPerformed
 
+    private void btCrearVisitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearVisitaActionPerformed
+        try{
+            String impronta = txtImprontaVisita.getText();
+            int nit = Integer.parseInt(txtTallerVisita.getText());
+
+            boolean ok = ctrlVisitaTaller.CrearVisita(impronta,nit);
+            if (ok){
+                txtImprontaVisita.setText("");
+                txtTallerVisita.setText("");
+                JOptionPane.showMessageDialog(this,"Nueva visita registrada satisfactoriamente del vehiculo con impronta: " + impronta + "en el taller con nit: " + nit);
+            } else {
+                JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear una visita.");
+            }
+
+
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un mecanico con  la información suministrada");
+        }
+    }//GEN-LAST:event_btCrearVisitaActionPerformed
+
     private void LlenarListaVehiculos(){
         ArrayList<clsVehiculo> vehiculos = ctrlVehiculo.ConsultarVehiculos();
 
@@ -1310,6 +1383,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private javax.swing.JButton btCrearMecanico;
     private javax.swing.JButton btCrearTaller;
     private javax.swing.JButton btCrearVehiculo;
+    private javax.swing.JButton btCrearVisita;
     private javax.swing.JButton btEditarAutomovil;
     private javax.swing.JButton btEditarAvion;
     private javax.swing.JButton btEditarMecanico;
@@ -1341,6 +1415,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -1348,6 +1423,8 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1377,6 +1454,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private javax.swing.JTextField txtIdentificacion;
     private javax.swing.JTextField txtImprontaAvion;
     private javax.swing.JTextField txtImprontaVehiculo;
+    private javax.swing.JTextField txtImprontaVisita;
     private javax.swing.JTextField txtMecanicosTallerMecanico;
     private javax.swing.JTextField txtMotoresAvion;
     private javax.swing.JTextField txtNitTallerMecanico;
@@ -1386,6 +1464,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private javax.swing.JTextField txtPasajerosAvion;
     private javax.swing.JTextField txtPasajerosVehiculo;
     private javax.swing.JTextField txtPlacaAutomovil;
+    private javax.swing.JTextField txtTallerVisita;
     private javax.swing.JTextField txtTelefonoTallerMecanico;
     // End of variables declaration//GEN-END:variables
 }
