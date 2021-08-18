@@ -37,6 +37,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         this.ctrlMecanico = new ctrlMecanico();
         this.ctrlTallerMecanico = new ctrlTallerMecanico();
         this.LlenarListaVehiculos();
+        this.LlenarListaMecanicos();
     }
 
     /**
@@ -948,17 +949,16 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btEditarAvionActionPerformed
 
     private void btCrearAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearAutomovilActionPerformed
-        try{
+        try {
             String improntaAutomovil = txtPlacaAutomovil.getText();
             int pasajerosAutomovil = Integer.parseInt(txtPasajerosAutomovil.getText());
             int cantidadCombustibleAutomovil = Integer.parseInt(txtCantidadCombustibleAutomovil.getText());
             String estadoAutomovil = cbEstadoAutomovil.getSelectedItem().toString();
             String tipoCombustible = cbTipoCombustibleAutomovil.getSelectedItem().toString();
 
-            clsAutomovil automovil = new clsAutomovil(tipoCombustible,pasajerosAutomovil,cantidadCombustibleAutomovil,improntaAutomovil,estadoAutomovil);
+            clsAutomovil automovil = new clsAutomovil(tipoCombustible, pasajerosAutomovil, cantidadCombustibleAutomovil, improntaAutomovil, estadoAutomovil);
 
-            boolean ok = ctrlVehiculo.CrearVehiculo(automovil); //ToDo: Conectar modelo con db
-
+            boolean ok = ctrlVehiculo.CrearVehiculo(automovil);
             if (ok) {
                 vehiculos.add(automovil);
                 this.LimpiarFormulariosVehiculos();
@@ -967,7 +967,7 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un automovil con  la información suministrada");
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un automovil con  la información suministrada");
         }
     }//GEN-LAST:event_btCrearAutomovilActionPerformed
@@ -1029,12 +1029,17 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
             int identificacion = Integer.parseInt(txtIdentificacion.getText());
             clsMecanico mecanico = new clsMecanico(nombre,apellidos,certificado,identificacion);
 
-            boolean ok = ctrlMecanico.CrearMecanico(mecanico); //ToDo: Conectar modelo con db
+            boolean ok = ctrlMecanico.CrearMecanico(mecanico);
+            if (ok){
+                mecanicos.add(mecanico);
+                this.LimpiarFormulariMecanicos();
+                this.LlenarListaMecanicos();
+                JOptionPane.showMessageDialog(this,"Se creo el mecanico con nombre: " + mecanico.getNombre() + " Apellido: : " + mecanico.getapellidos() + " Certificado: " + mecanico.getCertificado());
+            } else {
+                JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un mecanico con  la información suministrada");
+            }
 
-            mecanicos.add(mecanico);
-            this.LimpiarFormulariMecanicos();
-            this.LlenarListaMecanicos();
-            JOptionPane.showMessageDialog(this,"Se creo el mecanico con nombre: " + mecanico.getNombre() + " Apellido: : " + mecanico.getapellidos() + " Certificado: " + mecanico.getCertificado());
+
         }catch (Exception e){
             JOptionPane.showMessageDialog(this, "Revise datos. No es posible crear un mecanico con  la información suministrada");
         }
@@ -1043,45 +1048,30 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     private void btConsultarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarMecanicoActionPerformed
         int identificacionMecanico = Integer.parseInt(txtIdentificacion.getText());
 
-        clsMecanico m = ctrlMecanico.ConsultarMecanico(identificacionMecanico); //ToDo: Conectar modelos con db
-
-        boolean encontrado = false;
-        for (clsMecanico mecanico: this.mecanicos){
-            if (mecanico.getIdentificacion() == identificacionMecanico){
-                JOptionPane.showMessageDialog(this,"El mecanico identificado con : "
-                        + mecanico.getIdentificacion() + "\n"
-                        +"Nombre: " + mecanico.getNombre()+"\n"+
-                        "Apellidos: " + mecanico.getapellidos()+"\n"+
-                        "Certificacion: " +mecanico.getCertificado()+"\n");
-                encontrado = true;
-                break;
-            }
-        }
-        if(encontrado==false){
-            JOptionPane.showMessageDialog(this, "Mecanico no encontrado");
+        clsMecanico mecanico = ctrlMecanico.ConsultarMecanico(identificacionMecanico); //ToDo: Conectar modelos con db
+        if (mecanico == null) {
+            JOptionPane.showMessageDialog(this, "mecanico no encontrado");
+            this.LimpiarFormulariMecanicos();
+        } else {
+            txtNombreMecanico.setText(mecanico.getNombre() + "");
+            txtApellidosMecanico.setText(mecanico.getapellidos() + "");
+            txtCertificadoMecanico.setText(mecanico.getCertificado() + "");
+            JOptionPane.showMessageDialog(this, "mecanico encontrado satisfactoriamente");
         }
     }//GEN-LAST:event_btConsultarMecanicoActionPerformed
 
-    private void btEliminarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarMecanicoActionPerformed
+    private void btEliminarMecanicoActionPerformed(java.awt.event.ActionEvent evt)  {//GEN-FIRST:event_btEliminarMecanicoActionPerformed
         int identificacionMecanico = Integer.parseInt(txtIdentificacion.getText());
 
-        boolean ok = ctrlMecanico.EliminarMecanico(identificacionMecanico); // ToDo: Conectar modelos con db
-
-        boolean encontrado = false;
-        for (clsMecanico mecanico: this.mecanicos){
-            if (mecanico.getIdentificacion() == identificacionMecanico){
-                this.mecanicos.remove(mecanico);
-                this.LimpiarFormulariMecanicos();
-                this.LlenarListaMecanicos();
-                JOptionPane.showMessageDialog(this, "El Mecanico identificado con : "
-                        + mecanico.getIdentificacion() + " fue eliminado");
-                encontrado = true;
-                break;
-            }
+        boolean ok = ctrlMecanico.EliminarMecanico(identificacionMecanico);
+        if (ok) {
+            JOptionPane.showMessageDialog(this, "El mecanico con identificacion: "
+                    + identificacionMecanico + " fue eliminado");
+        } else {
+            JOptionPane.showMessageDialog(this, "mecanico no encontrado");
         }
-        if(encontrado==false){
-            JOptionPane.showMessageDialog(this, "Mecanico no encontrado");
-        }
+        this.LimpiarFormulariMecanicos();
+        this.LlenarListaMecanicos();
     }//GEN-LAST:event_btEliminarMecanicoActionPerformed
 
     private void btEditarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarMecanicoActionPerformed
@@ -1090,24 +1080,15 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
         String certificado = txtCertificadoMecanico.getText();
         int identificacion = Integer.parseInt(txtIdentificacion.getText());
 
-        boolean ok = ctrlMecanico.EditarMecanico(new clsMecanico(nombreMecanico,apellidoMecanico,certificado,identificacion)); //ToDo: Conectar modelos con DB
-
-        boolean encontrado = false;
-        for(clsMecanico mecanico : this.mecanicos){
-            if (mecanico.getIdentificacion() == identificacion) {
-                mecanico.setNombre(nombreMecanico);
-                mecanico.setapellidos(apellidoMecanico);
-                mecanico.setCertificado(certificado);
-                this.LimpiarFormulariMecanicos();
-                this.LlenarListaMecanicos();
-                JOptionPane.showMessageDialog(this, "El Mecanico identificado: "
-                        + mecanico.getIdentificacion() + " fue actualizado");
-                encontrado = true;
-                break;
-            }
-        }
-        if (encontrado==false){
-            JOptionPane.showMessageDialog(this, "Mecanico no encontrado");
+        boolean ok = ctrlMecanico.EditarMecanico(new clsMecanico(nombreMecanico,apellidoMecanico,certificado,identificacion));
+        if (ok){
+            JOptionPane.showMessageDialog(this, "El mecanico con identificacion: "
+                    + identificacion + " fue actualizado");
+            this.LimpiarFormulariosVehiculos();
+            this.LlenarListaVehiculos();
+        }else {
+            JOptionPane.showMessageDialog(this, "El mecanico con identificacion: "
+                    + identificacion + " NO fue actualizado");
         }
     }//GEN-LAST:event_btEditarMecanicoActionPerformed
 
@@ -1274,10 +1255,12 @@ public class AdministradorVehiculos extends javax.swing.JFrame {
     }
 
     private void LlenarListaMecanicos(){
+        ArrayList<clsMecanico> mecanicos = ctrlMecanico.ConsultarMecanicos();
+
         DefaultListModel model = new DefaultListModel();
         int index = 0;
         for (clsMecanico mecanico: mecanicos){
-            String datos = "Nombre: " + mecanico.getNombre() + " - Apellidos: " + mecanico.getapellidos() + " - Certificado: " + mecanico.getCertificado() + " - Identificacion: " + mecanico.getIdentificacion();
+            String datos = index +1 + ". Nombre: " + mecanico.getNombre() + " - Apellidos: " + mecanico.getapellidos() + " - Certificado: " + mecanico.getCertificado() + " - Identificacion: " + mecanico.getIdentificacion();
             model.add(index, datos);
             index++;
         }

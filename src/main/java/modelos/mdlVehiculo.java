@@ -61,10 +61,7 @@ public class mdlVehiculo {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, impronta);
             int filas_modificadas = statement.executeUpdate();
-            if (filas_modificadas > 0) {
-                return true;
-            }
-            return false;
+            return filas_modificadas > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
@@ -74,7 +71,7 @@ public class mdlVehiculo {
     public clsVehiculo ConsultarVehiculo(String impronta) {
         clsVehiculo vehiculo = null;
         try (Connection connection = DriverManager.getConnection(datosJDBC.getUrl(), datosJDBC.getUser(), datosJDBC.getPassword())) {
-            String query = "SELECT * FROConsultarVehiculosM tb_vehiculo WHERE impronta_chasis=?";
+            String query = "SELECT * FROm tb_vehiculo WHERE impronta_chasis=?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, impronta);
             ResultSet resultSet = statement.executeQuery();

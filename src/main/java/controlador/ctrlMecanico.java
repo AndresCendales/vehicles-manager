@@ -3,6 +3,8 @@ package controlador;
 import classes.clsMecanico;
 import modelos.mdlMecanico;
 
+import java.util.ArrayList;
+
 public class ctrlMecanico {
 
     private modelos.mdlMecanico mdlMecanico;
@@ -11,39 +13,49 @@ public class ctrlMecanico {
         this.mdlMecanico = new mdlMecanico();
     }
 
-    public boolean CrearMecanico(clsMecanico mecanico){
-        try{
+    public boolean CrearMecanico(clsMecanico mecanico) {
+        try {
             this.mdlMecanico.CrearMecanico(mecanico);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
 
-    public clsMecanico ConsultarMecanico(int identificacion){
+    public clsMecanico ConsultarMecanico(int identificacion) {
         clsMecanico mecanico = null;
-        try{
-            this.mdlMecanico.ConsultarMecanico(identificacion);
+        try {
+            mecanico = this.mdlMecanico.ConsultarMecanico(identificacion);
             return mecanico;
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
-    public boolean EditarMecanico(clsMecanico mecanico){
-        try{
+    public ArrayList<clsMecanico> ConsultarMecanicos() {
+        ArrayList<clsMecanico> mecanicos = new ArrayList<>();
+        try {
+            mecanicos = this.mdlMecanico.ConsultarMecanicos();
+            return mecanicos;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public boolean EditarMecanico(clsMecanico mecanico) {
+        try {
             this.mdlMecanico.EditarMecanico(mecanico);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
 
-    public boolean EliminarMecanico(int identificacion){
-        try{
+    public boolean EliminarMecanico(int identificacion) {
+        try {
             this.mdlMecanico.EliminarMecanico(identificacion);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
